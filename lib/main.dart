@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'buyer/buyer_home_page_Android_IOS.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -20,4 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
- 

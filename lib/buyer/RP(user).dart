@@ -34,7 +34,6 @@ class _RequestPartState extends State<RequestPart> {
   TextEditingController _partModel = TextEditingController();
   TextEditingController _partAddition = TextEditingController();
   String userID = "";
- 
 
   @override
   void initState() {
@@ -68,6 +67,7 @@ class _RequestPartState extends State<RequestPart> {
       },
     );
   }
+
   void _successMSG() {
     showDialog(
       context: context,
@@ -87,50 +87,52 @@ class _RequestPartState extends State<RequestPart> {
       },
     );
   }
-void selectImages() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
-    type: FileType.image,
-    allowMultiple: true,
-  );
 
-  if (result != null && result.files.isNotEmpty) {
-    List<PlatformFile> pickedFiles = result.files;
-    imageFileList.addAll(pickedFiles);
-
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Uploading Images'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 10),
-              Text('Uploading...'),
-            ],
-          ),
-        );
-      },
+  void selectImages() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: true,
     );
 
-    for (int index = 0; index < imageFileList.length; index++) {
-      await uploadImage(imageFileList[index]);
+    if (result != null && result.files.isNotEmpty) {
+      List<PlatformFile> pickedFiles = result.files;
+      imageFileList.addAll(pickedFiles);
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Uploading Images'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 10),
+                Text('Uploading...'),
+              ],
+            ),
+          );
+        },
+      );
+
+      for (int index = 0; index < imageFileList.length; index++) {
+        await uploadImage(imageFileList[index]);
+      }
+
+      Navigator.of(context).pop(); // Close the uploading dialog
     }
 
-    Navigator.of(context).pop(); // Close the uploading dialog
+    setState(() {});
   }
-
-  setState(() {});
-}
 
   List<String> _uploadedImageUrls = [];
   Future<void> uploadImage(PlatformFile platformFile) async {
     final bytes = platformFile.bytes;
     if (bytes == null) return;
 
-    final url = Uri.parse('https://my.partscart.lk/uploadFiles.php'); // Replace with your PHP script URL
+    final url = Uri.parse(
+        'https://my.partscart.lk/uploadFiles.php'); // Replace with your PHP script URL
     final request = http.MultipartRequest('POST', url);
     request.files.add(http.MultipartFile.fromBytes(
       'image',
@@ -148,13 +150,24 @@ void selectImages() async {
     }
   }
 
-  sendDataToApi(String para_name, String para_num, String para_desc, String para_country, String para_model, String para_date, String para_img, String para_addition,String user_ID) async {
+  sendDataToApi(
+      String para_name,
+      String para_num,
+      String para_desc,
+      String para_country,
+      String para_model,
+      String para_date,
+      String para_img,
+      String para_addition,
+      String user_ID) async {
     print("aawaa");
-    var url = 'https://my.partscart.lk/reqPart.php'; // Replace with your API endpoint
-    
+    var url =
+        'https://my.partscart.lk/reqPart.php'; // Replace with your API endpoint
+
     DateTime currentDateTime = DateTime.now();
-    
-    String formattedDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(currentDateTime);
+
+    String formattedDateTime =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(currentDateTime);
     print('User idddd:$userID');
     var data = {
       'part_name': para_name,
@@ -165,12 +178,12 @@ void selectImages() async {
       'part_date': para_date,
       'part_img': para_img,
       'part_addition': para_addition,
-      'user_ID' : userID,
-      'date_time':formattedDateTime,
+      'user_ID': userID,
+      'date_time': formattedDateTime,
     };
 
     var response = await http.post(Uri.parse(url), body: data);
-    
+
     if (response.statusCode == 200) {
       // Request successful, do something with the response
       print(response.body);
@@ -180,7 +193,6 @@ void selectImages() async {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
-
 
   Future<void> _showDatePicker(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -205,13 +217,13 @@ void selectImages() async {
     if (storedData != null) {
       List<dynamic> dataList = json.decode(storedData) as List<dynamic>;
       for (var item in dataList) {
-        userID = item['id'] as String; // Update this line to assign the value to the class-level variable
+        userID = item['id']
+            as String; // Update this line to assign the value to the class-level variable
         print(userID);
         // Do something with the retrieved data
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -231,138 +243,158 @@ void selectImages() async {
           child: Column(
             children: [
               SizedBox(height: 20),
-              TextField(
-                controller: _partName,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Part Name',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _partNumber,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Part Number',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _partDescription,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Description',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: countryController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  hintText: selectedCountry != null
-                      ? '${selectedCountry!.name}'
-                      : 'Select Country',
-                  hintStyle: TextStyle(
-                    color: Colors.black,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      showCountryPicker(
-                        context: context,
-                        showPhoneCode: false,
-                        onSelect: (Country country) {
-                          setState(() {
-                            selectedCountry = country;
-                          });
-                        },
-                      );
-                    },
-                    icon: Icon(Icons.adaptive.arrow_forward),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partName,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Part Name',
                   ),
                 ),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _partModel,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partNumber,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Part Number',
                   ),
-                  labelText: 'Model',
                 ),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _dateController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  // ignore: unnecessary_null_comparison
-                  hintText: selectedDate == null
-                      ? '${selectedDate.year}'
-                      : 'Select Year',
-                  hintStyle: TextStyle(
-                    color: Colors.black,
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partDescription,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Description',
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  suffixIcon: isIOS
-                      ? IconButton(
-                          icon: Icon(Icons.edit_calendar_outlined),
-                          onPressed: () {
-                            showCupertinoModalPopup(
-                              context: context,
-                              builder: (BuildContext builder) {
-                                return Container(
-                                  height: 300,
-                                  child: CupertinoDatePicker(
-                                    initialDateTime: selectedDate,
-                                    onDateTimeChanged: (DateTime newDate) {
-                                      setState(() {
-                                        selectedDate = newDate;
-                                        _dateController.text =
-                                            '${selectedDate.year}';
-                                      });
-                                    },
-                                    mode: CupertinoDatePickerMode.date,
-                                  ),
-                                );
-                              },
-                            );
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: countryController,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    hintText: selectedCountry != null
+                        ? '${selectedCountry!.name}'
+                        : 'Select Country',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        showCountryPicker(
+                          context: context,
+                          showPhoneCode: false,
+                          onSelect: (Country country) {
+                            setState(() {
+                              selectedCountry = country;
+                            });
                           },
-                        )
-                      : IconButton(
-                          icon: Icon(Icons.edit_calendar_rounded),
-                          onPressed: () {
-                            _showDatePicker(context);
-                            (DateTime newDate) {
-                              setState(() {
-                                selectedDate = newDate;
-                                _dateController.text =
-                                    '${selectedDate.year}';
-                              });
-                            };
-                          },
-                        ),
+                        );
+                      },
+                      icon: Icon(Icons.adaptive.arrow_forward),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partModel,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Model',
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _dateController,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    // ignore: unnecessary_null_comparison
+                    hintText: selectedDate == null
+                        ? '${selectedDate.year}'
+                        : 'Select Year',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: isIOS
+                        ? IconButton(
+                            icon: Icon(Icons.edit_calendar_outlined),
+                            onPressed: () {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (BuildContext builder) {
+                                  return Container(
+                                    height: 300,
+                                    child: CupertinoDatePicker(
+                                      initialDateTime: selectedDate,
+                                      onDateTimeChanged: (DateTime newDate) {
+                                        setState(() {
+                                          selectedDate = newDate;
+                                          _dateController.text =
+                                              '${selectedDate.year}';
+                                        });
+                                      },
+                                      mode: CupertinoDatePickerMode.date,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          )
+                        : IconButton(
+                            icon: Icon(Icons.edit_calendar_rounded),
+                            onPressed: () {
+                              _showDatePicker(context);
+                              (DateTime newDate) {
+                                setState(() {
+                                  selectedDate = newDate;
+                                  _dateController.text = '${selectedDate.year}';
+                                });
+                              };
+                            },
+                          ),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
               Row(
                 children: [
+                  Spacer(),
                   Text(
                     'Images',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
-                  Spacer(),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 50,
                     width: 50,
@@ -387,6 +419,7 @@ void selectImages() async {
                       ],
                     ),
                   ),
+                  Spacer(),
                 ],
               ),
               SizedBox(height: 10),
@@ -415,14 +448,17 @@ void selectImages() async {
                   ),
                 ],
               ),
-              TextField(
-                maxLines: 5,
-                controller: _partAddition,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  maxLines: 5,
+                  controller: _partAddition,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Addition',
                   ),
-                  labelText: 'Addition',
                 ),
               ),
               SizedBox(height: 20),
@@ -431,23 +467,32 @@ void selectImages() async {
                   var partname = _partName.text.trim();
                   var partnum = _partNumber.text.trim();
                   var partdesc = _partDescription.text.trim();
-                  var partcountry = selectedCountry != null ? '${selectedCountry!.name}' : '';
+                  var partcountry =
+                      selectedCountry != null ? '${selectedCountry!.name}' : '';
                   var partmodel = _partModel.text.trim();
                   var partdate = _dateController.text.trim();
                   var year = partdate.substring(0, 4);
-                  var partimg = _uploadedImageUrls.join(','); 
+                  var partimg = _uploadedImageUrls.join(',');
                   var partaddition = _partAddition.text.trim();
-                  
+
                   if (partname.isEmpty ||
                       partnum.isEmpty ||
                       partdesc.isEmpty ||
                       partcountry.isEmpty ||
                       partmodel.isEmpty ||
-                      year.isEmpty
-                      ) {
+                      year.isEmpty) {
                     _wrongCredentials();
                   } else {
-                    await sendDataToApi(partname, partnum, partdesc, partcountry, partmodel, year, partimg, partaddition,userID);
+                    await sendDataToApi(
+                        partname,
+                        partnum,
+                        partdesc,
+                        partcountry,
+                        partmodel,
+                        year,
+                        partimg,
+                        partaddition,
+                        userID);
                     // print("$year");
                   }
                 },
@@ -457,6 +502,7 @@ void selectImages() async {
                     color: const Color.fromARGB(255, 57, 55, 70),
                   ),
                   height: 80,
+                  width: 500,
                   child: Row(
                     children: [
                       SizedBox(width: 10),
@@ -479,7 +525,6 @@ void selectImages() async {
                   ),
                 ),
               ),
-
               SizedBox(height: 50),
             ],
           ),

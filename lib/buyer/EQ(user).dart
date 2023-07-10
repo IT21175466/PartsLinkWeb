@@ -8,10 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:gap/utils/device.dart';
 import 'package:path_provider/path_provider.dart';
-import 'BH(user).dart';
 import 'dart:io' if (dart.library.html) 'dart:html' as html;
 import 'package:file_picker/file_picker.dart';
-
 
 class editQuotationReqest extends StatefulWidget {
   const editQuotationReqest({super.key});
@@ -59,50 +57,51 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
     super.dispose();
   }
 
-void selectImages() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
-    type: FileType.image,
-    allowMultiple: true,
-  );
-
-  if (result != null && result.files.isNotEmpty) {
-    List<PlatformFile> pickedFiles = result.files;
-    imageFileList.addAll(pickedFiles);
-
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Uploading Images'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 10),
-              Text('Uploading...'),
-            ],
-          ),
-        );
-      },
+  void selectImages() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: true,
     );
 
-    for (int index = 0; index < imageFileList.length; index++) {
-      await uploadImage(imageFileList[index]);
+    if (result != null && result.files.isNotEmpty) {
+      List<PlatformFile> pickedFiles = result.files;
+      imageFileList.addAll(pickedFiles);
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Uploading Images'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 10),
+                Text('Uploading...'),
+              ],
+            ),
+          );
+        },
+      );
+
+      for (int index = 0; index < imageFileList.length; index++) {
+        await uploadImage(imageFileList[index]);
+      }
+
+      Navigator.of(context).pop(); // Close the uploading dialog
     }
 
-    Navigator.of(context).pop(); // Close the uploading dialog
+    setState(() {});
   }
-
-  setState(() {});
-}
 
   List<String> _uploadedImageUrls = [];
   Future<void> uploadImage(PlatformFile platformFile) async {
     final bytes = platformFile.bytes;
     if (bytes == null) return;
 
-    final url = Uri.parse('https://my.partscart.lk/uploadFiles.php'); // Replace with your PHP script URL
+    final url = Uri.parse(
+        'https://my.partscart.lk/uploadFiles.php'); // Replace with your PHP script URL
     final request = http.MultipartRequest('POST', url);
     request.files.add(http.MultipartFile.fromBytes(
       'image',
@@ -119,9 +118,6 @@ void selectImages() async {
       print(_uploadedImageUrls);
     }
   }
-
-
-
 
   void _wrongCredentials() {
     showDialog(
@@ -142,6 +138,7 @@ void selectImages() async {
       },
     );
   }
+
   void _updatedAlert() {
     showDialog(
       context: context,
@@ -168,149 +165,146 @@ void selectImages() async {
   }
 
   String notify_ID = "";
-Future<void> loadRequestId() async {
-  try {
-    final storage = html.window.localStorage;
-    if (storage != null) {
-      String? storedData = storage['notify_ID.json'];
-      if (storedData != null) {
-        Map<String, dynamic> dataMap = jsonDecode(storedData);
-        if (dataMap.containsKey('notify_ID')) {
-          notify_ID = dataMap['notify_ID'];
-          print(notify_ID);
-          loadDatatoPlaceholders(notify_ID);
-          return;
+  Future<void> loadRequestId() async {
+    try {
+      final storage = html.window.localStorage;
+      if (storage != null) {
+        String? storedData = storage['notify_ID.json'];
+        if (storedData != null) {
+          Map<String, dynamic> dataMap = jsonDecode(storedData);
+          if (dataMap.containsKey('notify_ID')) {
+            notify_ID = dataMap['notify_ID'];
+            print(notify_ID);
+            loadDatatoPlaceholders(notify_ID);
+            return;
+          }
         }
       }
+    } catch (e) {
+      print('Error loading request ID: $e');
     }
-  } catch (e) {
-    print('Error loading request ID: $e');
   }
-}
 
+  String partName = "";
+  String partNumber = "";
+  String partDescription = "";
+  String partModel = "";
+  String partYear = "";
+  String partAddition = "";
+  String partCountry = "";
+  String partImgz = "";
 
+  void loadDatatoPlaceholders(notify_ID) async {
+    try {
+      final url = 'https://my.partscart.lk/editFetchREQ.php';
+      final dataSend = {'nID': notify_ID};
+      final response = await http.post(Uri.parse(url), body: dataSend);
 
+      if (response.statusCode == 200) {
+        final jsonData = response.body;
+        // Parse the JSON response
+        final responseData = jsonDecode(jsonData);
 
-         String partName = "";
-         String partNumber = "";
-         String partDescription = "";
-         String partModel = "";
-         String partYear = "";
-         String partAddition ="";
-         String partCountry ="";
-         String partImgz="";
+        if (responseData.isNotEmpty) {
+          final notificationData = responseData.first;
+          // Access the values from the notificationData map
+          partName = notificationData['part_name'];
+          partNumber = notificationData['part_number'];
+          partDescription = notificationData['description'];
+          partModel = notificationData['model'];
+          partYear = notificationData['year_of_make'];
+          partAddition = notificationData['addition'];
+          partCountry = notificationData['country'];
+          partImgz = notificationData['image_link'];
 
-void loadDatatoPlaceholders(notify_ID) async {
-  try {
-    final url = 'https://my.partscart.lk/editFetchREQ.php';
-    final dataSend = {'nID': notify_ID};
-    final response = await http.post(Uri.parse(url), body: dataSend);
+          // Update the text of the corresponding TextEditingController
+          _partName.text = partName;
+          _partNumber.text = partNumber;
+          _partDescription.text = partDescription;
+          _partModel.text = partModel;
+          _partYear.text = partYear;
+          _partAddition.text = partAddition;
+        }
+      }
+    } catch (error) {
+      print('Failed to fetch notifications. Error: $error');
+    }
+  }
 
-    if (response.statusCode == 200) {
-      final jsonData = response.body;
-      // Parse the JSON response
-      final responseData = jsonDecode(jsonData);
+  void updateTheQuota(data1) async {
+    if (_uploadedImageUrls.isNotEmpty) {
+      var partimg = _uploadedImageUrls.join(',');
 
-      if (responseData.isNotEmpty) {
-        final notificationData = responseData.first;
-        // Access the values from the notificationData map
-         partName = notificationData['part_name'];
-         partNumber = notificationData['part_number'];
-         partDescription = notificationData['description'];
-         partModel = notificationData['model'];
-         partYear = notificationData['year_of_make'];
-         partAddition = notificationData['addition'];
-         partCountry = notificationData['country'];
-         partImgz = notificationData['image_link'];
-
-         // Update the text of the corresponding TextEditingController
-         _partName.text = partName;
-         _partNumber.text = partNumber;
-         _partDescription.text = partDescription;
-         _partModel.text = partModel;
-         _partYear.text = partYear;
-         _partAddition.text = partAddition;
+      if (data1 != "noCountry") {
+        var pName = _partName.text.trim();
+        var pNum = _partNumber.text.trim();
+        var pDesc = _partDescription.text.trim();
+        var pModel = _partModel.text.trim();
+        var pYear = _partYear.text.trim();
+        var pAdd = _partAddition.text.trim();
+        sendEDITED(pName, pNum, pDesc, pModel, pYear, pAdd, data1, partimg);
+      } else {
+        var pName = _partName.text.trim();
+        var pNum = _partNumber.text.trim();
+        var pDesc = _partDescription.text.trim();
+        var pModel = _partModel.text.trim();
+        var pYear = _partYear.text.trim();
+        var pAdd = _partAddition.text.trim();
+        sendEDITED(
+            pName, pNum, pDesc, pModel, pYear, pAdd, partCountry, partimg);
+      }
+    } else {
+      var partimg = partImgz;
+      if (data1 != "noCountry") {
+        var pName = _partName.text.trim();
+        var pNum = _partNumber.text.trim();
+        var pDesc = _partDescription.text.trim();
+        var pModel = _partModel.text.trim();
+        var pYear = _partYear.text.trim();
+        var pAdd = _partAddition.text.trim();
+        sendEDITED(pName, pNum, pDesc, pModel, pYear, pAdd, data1, partimg);
+      } else {
+        var pName = _partName.text.trim();
+        var pNum = _partNumber.text.trim();
+        var pDesc = _partDescription.text.trim();
+        var pModel = _partModel.text.trim();
+        var pYear = _partYear.text.trim();
+        var pAdd = _partAddition.text.trim();
+        sendEDITED(
+            pName, pNum, pDesc, pModel, pYear, pAdd, partCountry, partimg);
       }
     }
-  } catch (error) {
-    print('Failed to fetch notifications. Error: $error');
   }
-}
 
-void updateTheQuota(data1)async{
-    if(_uploadedImageUrls.isNotEmpty){
-
-        var partimg = _uploadedImageUrls.join(',');
-
-        if(data1!="noCountry"){
-            var pName = _partName.text.trim();
-            var pNum = _partNumber.text.trim();
-            var pDesc = _partDescription.text.trim();
-            var pModel = _partModel.text.trim();
-            var pYear = _partYear.text.trim();
-            var pAdd = _partAddition.text.trim();
-            sendEDITED(pName,pNum,pDesc,pModel,pYear,pAdd,data1,partimg);
-        }else{
-            var pName = _partName.text.trim();
-            var pNum = _partNumber.text.trim();
-            var pDesc = _partDescription.text.trim();
-            var pModel = _partModel.text.trim();
-            var pYear = _partYear.text.trim();
-            var pAdd = _partAddition.text.trim();
-            sendEDITED(pName,pNum,pDesc,pModel,pYear,pAdd,partCountry,partimg);
-
-        }
-    }else{
-        var partimg = partImgz;
-        if(data1!="noCountry"){
-            var pName = _partName.text.trim();
-            var pNum = _partNumber.text.trim();
-            var pDesc = _partDescription.text.trim();
-            var pModel = _partModel.text.trim();
-            var pYear = _partYear.text.trim();
-            var pAdd = _partAddition.text.trim();
-            sendEDITED(pName,pNum,pDesc,pModel,pYear,pAdd,data1,partimg);
-        }else{
-            var pName = _partName.text.trim();
-            var pNum = _partNumber.text.trim();
-            var pDesc = _partDescription.text.trim();
-            var pModel = _partModel.text.trim();
-            var pYear = _partYear.text.trim();
-            var pAdd = _partAddition.text.trim();
-            sendEDITED(pName,pNum,pDesc,pModel,pYear,pAdd,partCountry,partimg);
-
-        }
-    }
-
-}
-void sendEDITED(pname,pnum,pdesc,pmodel,pyear,padd,pcountry,pimg)async{
-  try {
-    final url = 'https://my.partscart.lk/updateREQUEST.php';
-    final dataSend = {
-        'id':notify_ID,
+  void sendEDITED(
+      pname, pnum, pdesc, pmodel, pyear, padd, pcountry, pimg) async {
+    try {
+      final url = 'https://my.partscart.lk/updateREQUEST.php';
+      final dataSend = {
+        'id': notify_ID,
         'pName': pname,
-        'pNum':pnum,
-        'pDesc':pdesc,
-        'pModel':pmodel,
-        'pYear':pyear,
-        'pAdd':padd,
-        'pCountry':pcountry,
-        'pImg':pimg,
-    };
-    final response = await http.post(Uri.parse(url), body: dataSend);
+        'pNum': pnum,
+        'pDesc': pdesc,
+        'pModel': pmodel,
+        'pYear': pyear,
+        'pAdd': padd,
+        'pCountry': pcountry,
+        'pImg': pimg,
+      };
+      final response = await http.post(Uri.parse(url), body: dataSend);
 
-    if (response.statusCode == 200) {
-      final jsonData = response.body;
-      print(jsonData);
-      if(jsonData=="success"){
+      if (response.statusCode == 200) {
+        final jsonData = response.body;
+        print(jsonData);
+        if (jsonData == "success") {
           _updatedAlert();
-    }
-
-    }
-  }catch(error){
+        }
+      }
+    } catch (error) {
       print("An error occured :$error");
-}
-}
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
@@ -328,10 +322,11 @@ void sendEDITED(pname,pnum,pdesc,pmodel,pyear,padd,pcountry,pimg)async{
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           child: Column(
             children: [
-            Text(
-            "If you do not edit these fields they will be reverted to their default values.",
-            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
-            ),
+              Text(
+                "If you do not edit these fields they will be reverted to their default values.",
+                style:
+                    TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+              ),
               SizedBox(height: 20),
               TextField(
                 controller: _partName,
@@ -472,7 +467,6 @@ void sendEDITED(pname,pnum,pdesc,pmodel,pyear,padd,pcountry,pimg)async{
                   ),
                 ],
               ),
-
               TextField(
                 maxLines: 5,
                 controller: _partAddition,
@@ -486,11 +480,10 @@ void sendEDITED(pname,pnum,pdesc,pmodel,pyear,padd,pcountry,pimg)async{
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                selectedCountry != null
-                    ? updateTheQuota(selectedCountry!.name)
-                    : updateTheQuota("noCountry");
+                  selectedCountry != null
+                      ? updateTheQuota(selectedCountry!.name)
+                      : updateTheQuota("noCountry");
                 },
-
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
