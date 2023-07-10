@@ -139,20 +139,21 @@ class _UserSettingState2 extends State<UserSetting2> {
                 height: 100, // Desired height
                 child: Image.asset("assets/avatar.png"),
               ),
+              SizedBox(height: 20),
+              Container(
+                child: Text(
+                  '$usr',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 40,
+                  ),
+                ),
+              ),
               SizedBox(height: 50),
               Container(
                 child: Row(
                   children: [
                     Spacer(),
-                    Container(
-                      child: Text(
-                        '$usr',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 40,
-                        ),
-                      ),
-                    ),
                     Container(
                       child: Text(
                         'Change Username',
