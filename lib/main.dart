@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/buyer/VS(vendor).dart';
 import 'buyer/buyer_home_page_Android_IOS.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: BuyerHomePage2(),
+      home: VendorSetting(),
     );
   }
 }
