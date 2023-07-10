@@ -18,7 +18,6 @@ import 'network2.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 
-
 class SellerForm2 extends StatefulWidget {
   const SellerForm2({Key? key}) : super(key: key);
 
@@ -318,12 +317,12 @@ class _SellerForm2State extends State<SellerForm2> {
           child: Column(
             children: [
               Container(
-                width: 675, // Set your desired width here
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _companyNameController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'Company Name',
                   ),
@@ -331,12 +330,12 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _addressController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'Address',
                   ),
@@ -344,12 +343,12 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _mobileController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'Mobile Number',
                   ),
@@ -357,12 +356,12 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'E-mail',
                   ),
@@ -370,12 +369,13 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _passwordController,
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'Password',
                   ),
@@ -383,12 +383,13 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _conpasswordController,
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'Conform Password',
                   ),
@@ -396,12 +397,12 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _nicController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'NIC',
                   ),
@@ -480,86 +481,82 @@ class _SellerForm2State extends State<SellerForm2> {
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 20),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Spacer(),
-                      ElevatedButton(
-                        onPressed: pickFiles3,
-                        child: Text(
-                          'Open File Picker',
-                        ),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                  Text(
-                    "",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+
+              Container(
+                width: 400,
+                child: Column(
+                  children: [
+                    Row(
                       children: [
-                        CheckboxListTile(
-                          title: Text("Brand New"),
-                          value: isCheckedBNew,
-                          onChanged: (bool? newBool) {
-                            setState(() {
-                              isCheckedBNew = newBool;
-                              if (newBool == true) {
-                                selectedStringValue = "5";
-                              } else {
-                                selectedStringValue = null;
-                              }
-                              isCheckedBNew = newBool;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
+                        Spacer(),
+                        ElevatedButton(
+                          onPressed: pickFiles3,
+                          child: Text(
+                            'Open File Picker',
+                          ),
                         ),
-                        CheckboxListTile(
-                          title: Text("Recondition"),
-                          value: isCheckedRecondition,
-                          onChanged: (bool? newBool) {
-                            setState(() {
-                              isCheckedRecondition = newBool;
-                              if (newBool == true) {
-                                selectedStringValue2 = "6";
-                              } else {
-                                selectedStringValue2 = null;
-                              }
-                              isCheckedRecondition = newBool;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
-                        ),
-                        CheckboxListTile(
-                          title: Text("Locally used"),
-                          value: isCheckedLocally,
-                          onChanged: (bool? newBool) {
-                            setState(() {
-                              isCheckedLocally = newBool;
-                              if (newBool == true) {
-                                selectedStringValue3 = "7";
-                              } else {
-                                selectedStringValue3 = null;
-                              }
-                              isCheckedLocally = newBool;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
-                        ),
+                        Spacer(),
                       ],
                     ),
-                  ),
-                ],
-              ),
-              ListTile(
-                title: const Text('Privacy Policy Terms & Services'),
-                leading: Icon(Icons.radio_button_checked),
-              ),
+                    Text(
+                      "",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    CheckboxListTile(
+                      title: Text("Brand New"),
+                      value: isCheckedBNew,
+                      onChanged: (bool? newBool) {
+                        setState(() {
+                          isCheckedBNew = newBool;
+                          if (newBool == true) {
+                            selectedStringValue = "5";
+                          } else {
+                            selectedStringValue = null;
+                          }
+                          isCheckedBNew = newBool;
+                        });
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                    CheckboxListTile(
+                      title: Text("Recondition"),
+                      value: isCheckedRecondition,
+                      onChanged: (bool? newBool) {
+                        setState(() {
+                          isCheckedRecondition = newBool;
+                          if (newBool == true) {
+                            selectedStringValue2 = "6";
+                          } else {
+                            selectedStringValue2 = null;
+                          }
+                          isCheckedRecondition = newBool;
+                        });
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                    CheckboxListTile(
+                      title: Text("Locally used"),
+                      value: isCheckedLocally,
+                      onChanged: (bool? newBool) {
+                        setState(() {
+                          isCheckedLocally = newBool;
+                          if (newBool == true) {
+                            selectedStringValue3 = "7";
+                          } else {
+                            selectedStringValue3 = null;
+                          }
+                          isCheckedLocally = newBool;
+                        });
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                    )
+                  ],
+                ),
+              ),const SizedBox(height: 20),
+              // ListTile(
+              //   title: const Text('Privacy Policy Terms & Services'),
+              //   leading: Icon(Icons.radio_button_checked),
+              // ),
               ElevatedButton(
                 onPressed: () async {
                   String companyname = _companyNameController.text;
@@ -582,31 +579,45 @@ class _SellerForm2State extends State<SellerForm2> {
                   print(f1);
                   print(f2);
 
-                  if (isCheckedBNew == true && isCheckedRecondition == false && isCheckedLocally == false) {
+                  if (isCheckedBNew == true &&
+                      isCheckedRecondition == false &&
+                      isCheckedLocally == false) {
                     appr_id = "4";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == true && isCheckedRecondition == true && isCheckedLocally == false) {
+                  } else if (isCheckedBNew == true &&
+                      isCheckedRecondition == true &&
+                      isCheckedLocally == false) {
                     appr_id = "5";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == true && isCheckedRecondition == true && isCheckedLocally == true) {
+                  } else if (isCheckedBNew == true &&
+                      isCheckedRecondition == true &&
+                      isCheckedLocally == true) {
                     appr_id = "6";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == false && isCheckedRecondition == true && isCheckedLocally == false) {
+                  } else if (isCheckedBNew == false &&
+                      isCheckedRecondition == true &&
+                      isCheckedLocally == false) {
                     appr_id = "7";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == false && isCheckedRecondition == true && isCheckedLocally == true) {
+                  } else if (isCheckedBNew == false &&
+                      isCheckedRecondition == true &&
+                      isCheckedLocally == true) {
                     appr_id = "8";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == true && isCheckedRecondition == false && isCheckedLocally == true) {
+                  } else if (isCheckedBNew == true &&
+                      isCheckedRecondition == false &&
+                      isCheckedLocally == true) {
                     appr_id = "9";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == false && isCheckedRecondition == false && isCheckedLocally == true) {
+                  } else if (isCheckedBNew == false &&
+                      isCheckedRecondition == false &&
+                      isCheckedLocally == true) {
                     appr_id = "10";
                     debugPrint(appr_id);
                   } else {
                     _wrongCredentials();
                     return;
-                  }  
+                  }
                   if (companyname.isEmpty ||
                       companyname == null ||
                       password.isEmpty ||

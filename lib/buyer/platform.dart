@@ -15,26 +15,24 @@ class _PlatformScreenState2 extends State<PlatformScreen2> {
   String? selectedOption;
 
   void _selectAnOption(BuildContext context) {
-
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("Selection Error"),
-            content: Text("Please select one option."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("Selection Error"),
+          content: Text("Please select one option."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +43,7 @@ class _PlatformScreenState2 extends State<PlatformScreen2> {
         child: Center(
           child: Column(
             children: [
+              const SizedBox(height: 40),
               const Text(
                 'What do you want to do in the platform?',
                 style: TextStyle(
@@ -53,30 +52,50 @@ class _PlatformScreenState2 extends State<PlatformScreen2> {
                 ),
               ),
               const SizedBox(height: 40),
-              ListTile(
-                title: const Text('I want to buy vehicle parts'),
-                leading: Radio(
-                  value: 'user',
-                  groupValue: selectedOption,
-                  onChanged: (value) {
+              SizedBox(
+                width: 400,
+                child: ListTile(
+                  //contentPadding: EdgeInsets.symmetric(horizontal: 100),
+                  title: const Text('I want to buy vehicle parts'),
+                  leading: Radio(
+                    value: 'user',
+                    groupValue: selectedOption,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedOption = value as String?;
+                      });
+                      print('Selected: $value');
+                    },
+                  ),
+                  onTap: () {
                     setState(() {
-                      selectedOption = value as String?;
+                      selectedOption = "user" as String?;
                     });
-                    print('Selected: $value');
+                    print('Selected: user');
                   },
                 ),
               ),
               const SizedBox(height: 30),
-              ListTile(
-                title: const Text('I want to sell vehicle parts'),
-                leading: Radio(
-                  value: 'vendor',
-                  groupValue: selectedOption,
-                  onChanged: (value) {
+              SizedBox(
+                width: 400,
+                child: ListTile(
+                  //contentPadding: EdgeInsets.symmetric(horizontal: 100),
+                  title: const Text('I want to sell vehicle parts'),
+                  leading: Radio(
+                    value: 'vendor',
+                    groupValue: selectedOption,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedOption = value as String?;
+                      });
+                      print('Selected: $value');
+                    },
+                  ),
+                  onTap: () {
                     setState(() {
-                      selectedOption = value as String?;
+                      selectedOption = "vendor" as String?;
                     });
-                    print('Selected: $value');
+                    print('Selected: vendor');
                   },
                 ),
               ),

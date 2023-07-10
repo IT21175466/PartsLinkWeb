@@ -81,7 +81,7 @@ Future<void> fetchCarouselData() async {
               child: Text(
                 "Hot sellings 🔥",
                 style: TextStyle(
-                    fontSize: 30 * widthFactor,
+                    fontSize: 15 * widthFactor,
                     color: Colors.black,
                     fontWeight: FontWeight.w500),
                 textAlign: TextAlign.left,
@@ -190,7 +190,7 @@ Future<void> fetchCarouselData() async {
               child: Text(
                 "Reminders 🎗️",
                 style: TextStyle(
-                    fontSize: 30 * widthFactor,
+                    fontSize: 15 * widthFactor,
                     color: Colors.black,
                     fontWeight: FontWeight.w500),
                 textAlign: TextAlign.left,
@@ -198,31 +198,32 @@ Future<void> fetchCarouselData() async {
             ),
             SizedBox(
               height: 30 * heightFactor,
-            ),
-            GestureDetector(
+            ),GestureDetector(
               child: Container(
-                height: 340 * heightFactor,
-                width: 440 * widthFactor,
+                alignment: Alignment.center,
+                height: 300 * heightFactor,
+                width: 400 * widthFactor,
+                color: Color.fromRGBO(0, 0, 0, 1),
                 child: Stack(
                   children: [
-                    Image.asset("assets/background_1.png"),
                     Container(
                       alignment: Alignment.center,
-                      height: 320 * heightFactor,
+                      height: 290 * heightFactor,
+                      width: 200 * widthFactor,
                       child: Text(
                         "Reminders by admin",
                         style: TextStyle(
-                            fontSize: 30 * widthFactor,
+                            fontSize: 15 * widthFactor,
                             color: Colors.white,
                             fontWeight: FontWeight.w300),
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ],
                 ),
               ),
               onTap: () {
-                  if (isLoggedIn == true) {
+                 if (isLoggedIn == true) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => NotificationPage()),
@@ -230,6 +231,37 @@ Future<void> fetchCarouselData() async {
                   }
               },
             ),
+            // GestureDetector(
+            //   child: Container(
+            //     height: 340 * heightFactor,
+            //     width: 440 * widthFactor,
+            //     child: Stack(
+            //       children: [
+            //         Image.asset("assets/background_1.png"),
+            //         Container(
+            //           alignment: Alignment.center,
+            //           height: 320 * heightFactor,
+            //           child: Text(
+            //             "Reminders by admin",
+            //             style: TextStyle(
+            //                 fontSize: 30 * widthFactor,
+            //                 color: Colors.white,
+            //                 fontWeight: FontWeight.w300),
+            //             textAlign: TextAlign.justify,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            //   onTap: () {
+            //       if (isLoggedIn == true) {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(builder: (context) => NotificationPage()),
+            //         );
+            //       }
+            //   },
+            // ),
 
 
 

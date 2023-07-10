@@ -29,67 +29,63 @@ class _BuyerFormState2 extends State<BuyerForm2> {
   }
 
   void _wrongCredentials() {
-
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("Credential Error"),
-            content: Text("Please fill all the required fields."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("Credential Error"),
+          content: Text("Please fill all the required fields."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   void _passwordNotTheSame() {
-
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("Matching error"),
-            content: Text("Your passwords are not the same."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-  
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("Matching error"),
+          content: Text("Your passwords are not the same."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   void _userCreation(alert) {
-
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("User Creation"),
-            content: Text(alert),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("User Creation"),
+          content: Text(alert),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -101,6 +97,7 @@ class _BuyerFormState2 extends State<BuyerForm2> {
         child: Center(
           child: Column(
             children: [
+              const SizedBox(height: 30),
               Center(
                 child: Container(
                   height: 80,
@@ -110,112 +107,169 @@ class _BuyerFormState2 extends State<BuyerForm2> {
               ),
               const SizedBox(height: 20),
               Container(
-                width: double
-                    .infinity, // Set the desired width for the username field
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _usernameController,
                   decoration: InputDecoration(
-                    hintText: 'Username',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
+                    labelText: 'Username',
                   ),
                 ),
               ),
+              // Container(
+              //   width: 450, // Set the desired width for the username field
+              //   child: TextField(
+              //     controller: _usernameController,
+              //     decoration: InputDecoration(
+              //       hintText: 'Username',
+              //       hintStyle: TextStyle(
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w400,
+              //         fontSize: 16,
+              //       ),
+              //       border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(10.0),
+              //       ),
+              //       filled: true,
+              //       fillColor: Colors.white,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Container(
-                width: double
-                    .infinity, // Set the desired width for the username field
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                    hintText: 'Email',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
+                    labelText: 'Email',
                   ),
                 ),
               ),
+              // Container(
+              //   width: 450, // Set the desired width for the username field
+              //   child: TextField(
+              //     controller: _emailController,
+              //     decoration: InputDecoration(
+              //       hintText: 'Email',
+              //       hintStyle: TextStyle(
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w400,
+              //         fontSize: 16,
+              //       ),
+              //       border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(10.0),
+              //       ),
+              //       filled: true,
+              //       fillColor: Colors.white,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Container(
-                width: double
-                    .infinity, // Set the desired width for the username field
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _mobileController,
                   decoration: InputDecoration(
-                    hintText: 'Mobile Number',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
+                    labelText: 'Mobile Number',
                   ),
                 ),
               ),
+              // Container(
+              //   width: 450, // Set the desired width for the username field
+              //   child: TextField(
+              //     controller: _mobileController,
+              //     decoration: InputDecoration(
+              //       hintText: 'Mobile Number',
+              //       hintStyle: TextStyle(
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w400,
+              //         fontSize: 16,
+              //       ),
+              //       border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(10.0),
+              //       ),
+              //       filled: true,
+              //       fillColor: Colors.white,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Container(
-                width: double
-                    .infinity, // Set the desired width for the username field
-
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: 'Password',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
+                    labelText: 'Password',
                   ),
                 ),
               ),
+              // Container(
+              //   width: 450, // Set the desired width for the username field
+
+              //   child: TextField(
+              //     controller: _passwordController,
+              //     obscureText: true,
+              //     decoration: InputDecoration(
+              //       hintText: 'Password',
+              //       hintStyle: TextStyle(
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w400,
+              //         fontSize: 16,
+              //       ),
+              //       border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(10.0),
+              //       ),
+              //       filled: true,
+              //       fillColor: Colors.white,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Container(
-                width: double
-                    .infinity, // Set the desired width for the username field
+                width: 450, // Set your desired width here
                 child: TextField(
                   controller: _conpasswordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: 'Confirm Password',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
+                    labelText: 'Confirm Password',
                   ),
                 ),
               ),
+              // Container(
+              //   width: 450, // Set the desired width for the username field
+              //   child: TextField(
+              //     controller: _conpasswordController,
+              //     obscureText: true,
+              //     decoration: InputDecoration(
+              //       hintText: 'Confirm Password',
+              //       hintStyle: TextStyle(
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.w400,
+              //         fontSize: 16,
+              //       ),
+              //       border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(10.0),
+              //       ),
+              //       filled: true,
+              //       fillColor: Colors.white,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () async {
@@ -257,7 +311,7 @@ class _BuyerFormState2 extends State<BuyerForm2> {
                       borderRadius: BorderRadius.circular(50),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(370, 65)),
+                  minimumSize: MaterialStateProperty.all<Size>(Size(400, 65)),
                 ),
                 child: Text(
                   'Register',

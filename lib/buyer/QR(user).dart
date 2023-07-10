@@ -322,7 +322,20 @@ class _QuotationReqestState extends State<QuotationReqest> {
           child: Column(
             children: [
               SizedBox(height: 20),
+              SizedBox(
+                width: 400,
+                child: TextField(
+                  controller: _partName,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Company Name',
+                  ),
+                ),
+              ),
               TextField(
+                
                 controller: _partName,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
