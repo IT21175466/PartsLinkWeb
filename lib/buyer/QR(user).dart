@@ -167,6 +167,7 @@ class _QuotationReqestState extends State<QuotationReqest> {
       return "error";
     }
   }
+
   Future<String> getUSERSID() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String filePath = '${directory.path}/data.json';
@@ -177,133 +178,131 @@ class _QuotationReqestState extends State<QuotationReqest> {
       List<dynamic> dataList = json.decode(jsonData);
 
       for (var data in dataList) {
-        userID =  data['id'];
+        userID = data['id'];
       }
     }
     return "";
   }
-  void _process(countryZ) async{
-                  //Uncomment this after finishing the vendor frontend
-                  // Directory directory =
-                  //     await getApplicationDocumentsDirectory();
-                  // String filePath = '${directory.path}/data.json';
 
-                  // bool fileExists = await File(filePath).exists();
-                  // if (fileExists) {
-                  //   String jsonData = await File(filePath).readAsString();
-                  //   List<dynamic> dataList = json.decode(jsonData);
+  void _process(countryZ) async {
+    //Uncomment this after finishing the vendor frontend
+    // Directory directory =
+    //     await getApplicationDocumentsDirectory();
+    // String filePath = '${directory.path}/data.json';
 
-                  //   for (var data in dataList) {
-                  //     setState(() {
-                  //       userID = data['id'];
-                  //     });
-                  //   }
-                  // }
-                  DateTime currentDateTime = DateTime.now();
-                  String formattedDateTime =
-                      DateFormat('yyyy-MM-dd HH:mm:ss').format(currentDateTime);
+    // bool fileExists = await File(filePath).exists();
+    // if (fileExists) {
+    //   String jsonData = await File(filePath).readAsString();
+    //   List<dynamic> dataList = json.decode(jsonData);
 
-                  var partname = _partName.text.trim();
-                  var dateTime = formattedDateTime;
-                  var partnum = _partNumber.text.trim();
-                  var partdesc = _partDescription.text.trim();
-                  var partcountry =
-                      selectedCountry != null ? countryZ : '';
-                  var partmodel = _partModel.text.trim();
-                  var partdate = _dateController.text.trim();
-                  var year = partdate.substring(0, 4);
-                  var partimg = _uploadedImageUrls.join(',');
-                  var partaddition = _partAddition.text.trim();
-                  var condition_id = "";
+    //   for (var data in dataList) {
+    //     setState(() {
+    //       userID = data['id'];
+    //     });
+    //   }
+    // }
+    DateTime currentDateTime = DateTime.now();
+    String formattedDateTime =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(currentDateTime);
 
+    var partname = _partName.text.trim();
+    var dateTime = formattedDateTime;
+    var partnum = _partNumber.text.trim();
+    var partdesc = _partDescription.text.trim();
+    var partcountry = selectedCountry != null ? countryZ : '';
+    var partmodel = _partModel.text.trim();
+    var partdate = _dateController.text.trim();
+    var year = partdate.substring(0, 4);
+    var partimg = _uploadedImageUrls.join(',');
+    var partaddition = _partAddition.text.trim();
+    var condition_id = "";
 
-                  if (partname.isEmpty ||
-                          partnum.isEmpty ||
-                          partdesc.isEmpty ||
-                          partcountry.isEmpty ||
-                          partmodel.isEmpty ||
-                          year.isEmpty
-                      // year.isEmpty
-                      ) {
-                    _wrongCredentials();
-                  } else {
-                    if (isCheckedBNew == true &&
-                        isCheckedRecondition == false &&
-                        isCheckedLocally == false) {
-                      condition_id = "4";
-                      debugPrint(condition_id);
-                    } else if (isCheckedBNew == true &&
-                        isCheckedRecondition == true &&
-                        isCheckedLocally == false) {
-                      condition_id = "5";
-                      debugPrint(condition_id);
-                    } else if (isCheckedBNew == true &&
-                        isCheckedRecondition == true &&
-                        isCheckedLocally == true) {
-                      condition_id = "6";
-                      debugPrint(condition_id);
-                    } else if (isCheckedBNew == false &&
-                        isCheckedRecondition == true &&
-                        isCheckedLocally == false) {
-                      condition_id = "7";
-                      debugPrint(condition_id);
-                    } else if (isCheckedBNew == false &&
-                        isCheckedRecondition == true &&
-                        isCheckedLocally == true) {
-                      condition_id = "8";
-                      debugPrint(condition_id);
-                    } else if (isCheckedBNew == true &&
-                        isCheckedRecondition == false &&
-                        isCheckedLocally == true) {
-                      condition_id = "9";
-                      debugPrint(condition_id);
-                    } else if (isCheckedBNew == false &&
-                        isCheckedRecondition == false &&
-                        isCheckedLocally == true) {
-                      condition_id = "10";
-                      debugPrint(condition_id);
-                    } else {
-                      _wrongCredentials();
-                      return;
-                    }
-                    print("seems fine");
-                    print(partimg);
-                    print(userID);
-                    try {
-                      final url =
-                          'https://my.partscart.lk/insert_quotation.php';
+    if (partname.isEmpty ||
+            partnum.isEmpty ||
+            partdesc.isEmpty ||
+            partcountry.isEmpty ||
+            partmodel.isEmpty ||
+            year.isEmpty
+        // year.isEmpty
+        ) {
+      _wrongCredentials();
+    } else {
+      if (isCheckedBNew == true &&
+          isCheckedRecondition == false &&
+          isCheckedLocally == false) {
+        condition_id = "4";
+        debugPrint(condition_id);
+      } else if (isCheckedBNew == true &&
+          isCheckedRecondition == true &&
+          isCheckedLocally == false) {
+        condition_id = "5";
+        debugPrint(condition_id);
+      } else if (isCheckedBNew == true &&
+          isCheckedRecondition == true &&
+          isCheckedLocally == true) {
+        condition_id = "6";
+        debugPrint(condition_id);
+      } else if (isCheckedBNew == false &&
+          isCheckedRecondition == true &&
+          isCheckedLocally == false) {
+        condition_id = "7";
+        debugPrint(condition_id);
+      } else if (isCheckedBNew == false &&
+          isCheckedRecondition == true &&
+          isCheckedLocally == true) {
+        condition_id = "8";
+        debugPrint(condition_id);
+      } else if (isCheckedBNew == true &&
+          isCheckedRecondition == false &&
+          isCheckedLocally == true) {
+        condition_id = "9";
+        debugPrint(condition_id);
+      } else if (isCheckedBNew == false &&
+          isCheckedRecondition == false &&
+          isCheckedLocally == true) {
+        condition_id = "10";
+        debugPrint(condition_id);
+      } else {
+        _wrongCredentials();
+        return;
+      }
+      print("seems fine");
+      print(partimg);
+      print(userID);
+      try {
+        final url = 'https://my.partscart.lk/insert_quotation.php';
 
-                      final response = await http.post(Uri.parse(url), body: {
-                        'partname': partname,
-                        'dateTime': dateTime,
-                        'partnum': partnum,
-                        'partdesc': partdesc,
-                        'partcountry': partcountry,
-                        'partmodel': partmodel,
-                        'partdate': year,
-                        'partimg': partimg,
-                        'partaddition': partaddition,
-                        'userID': userID,
-                        'condition_id': condition_id,
-                        'reqID':req_ID,
-                      });
+        final response = await http.post(Uri.parse(url), body: {
+          'partname': partname,
+          'dateTime': dateTime,
+          'partnum': partnum,
+          'partdesc': partdesc,
+          'partcountry': partcountry,
+          'partmodel': partmodel,
+          'partdate': year,
+          'partimg': partimg,
+          'partaddition': partaddition,
+          'userID': userID,
+          'condition_id': condition_id,
+          'reqID': req_ID,
+        });
 
-                      if (response.statusCode == 200) {
-                        final jsonData = response.body;
-                        // Print the echoing response of the PHP file
-                        print('PHP Response: $jsonData');
-                        // ... handle success or display a success message
-                      } else {
-                        print(
-                            'API request failed with status code ${response.statusCode}');
-                        // ... handle error or display an error message
-                      }
-                    } catch (error) {
-                      print('Error: $error');
-                      // ... handle error or display an error message
-                    }
-                  }
+        if (response.statusCode == 200) {
+          final jsonData = response.body;
+          // Print the echoing response of the PHP file
+          print('PHP Response: $jsonData');
+          // ... handle success or display a success message
+        } else {
+          print('API request failed with status code ${response.statusCode}');
+          // ... handle error or display an error message
+        }
+      } catch (error) {
+        print('Error: $error');
+        // ... handle error or display an error message
+      }
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
@@ -322,137 +321,158 @@ class _QuotationReqestState extends State<QuotationReqest> {
           child: Column(
             children: [
               SizedBox(height: 20),
-              TextField(
-                controller: _partName,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Part Name',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _partNumber,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Part Number',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _partDescription,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Description',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: countryController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  hintText: selectedCountry != null
-                      ? '${selectedCountry!.name}'
-                      : 'Select Country',
-                  hintStyle: TextStyle(
-                    color: Colors.black,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      showCountryPicker(
-                        context: context,
-                        showPhoneCode: false,
-                        onSelect: (Country country) {
-                          setState(() {
-                            selectedCountry = country;
-                          });
-                        },
-                      );
-                    },
-                    icon: Icon(Icons.adaptive.arrow_forward),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partName,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Part Name',
                   ),
                 ),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _partModel,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partNumber,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Part Number',
                   ),
-                  labelText: 'Model',
                 ),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _dateController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  // ignore: unnecessary_null_comparison
-                  hintText: selectedDate == null
-                      ? '${selectedDate.year}'
-                      : 'Select Year',
-                  hintStyle: TextStyle(
-                    color: Colors.black,
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partDescription,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Description',
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  suffixIcon: isIOS
-                      ? IconButton(
-                          icon: Icon(Icons.edit_calendar_outlined),
-                          onPressed: () {
-                            showCupertinoModalPopup(
-                              context: context,
-                              builder: (BuildContext builder) {
-                                return Container(
-                                  height: 300,
-                                  child: CupertinoDatePicker(
-                                    initialDateTime: selectedDate,
-                                    onDateTimeChanged: (DateTime newDate) {
-                                      setState(() {
-                                        selectedDate = newDate;
-                                        _dateController.text =
-                                            '${selectedDate.year}';
-                                      });
-                                    },
-                                    mode: CupertinoDatePickerMode.date,
-                                  ),
-                                );
-                              },
-                            );
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: countryController,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    hintText: selectedCountry != null
+                        ? '${selectedCountry!.name}'
+                        : 'Select Country',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        showCountryPicker(
+                          context: context,
+                          showPhoneCode: false,
+                          onSelect: (Country country) {
+                            setState(() {
+                              selectedCountry = country;
+                            });
                           },
-                        )
-                      : IconButton(
-                          icon: Icon(Icons.edit_calendar_rounded),
-                          onPressed: () {
-                            _showDatePicker(context);
-                            (DateTime newDate) {
-                              setState(() {
-                                selectedDate = newDate;
-                                _dateController.text = '${selectedDate.year}';
-                              });
-                            };
-                          },
-                        ),
+                        );
+                      },
+                      icon: Icon(Icons.adaptive.arrow_forward),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partModel,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Model',
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _dateController,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    // ignore: unnecessary_null_comparison
+                    hintText: selectedDate == null
+                        ? '${selectedDate.year}'
+                        : 'Select Year',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: isIOS
+                        ? IconButton(
+                            icon: Icon(Icons.edit_calendar_outlined),
+                            onPressed: () {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (BuildContext builder) {
+                                  return Container(
+                                    height: 300,
+                                    child: CupertinoDatePicker(
+                                      initialDateTime: selectedDate,
+                                      onDateTimeChanged: (DateTime newDate) {
+                                        setState(() {
+                                          selectedDate = newDate;
+                                          _dateController.text =
+                                              '${selectedDate.year}';
+                                        });
+                                      },
+                                      mode: CupertinoDatePickerMode.date,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          )
+                        : IconButton(
+                            icon: Icon(Icons.edit_calendar_rounded),
+                            onPressed: () {
+                              _showDatePicker(context);
+                              (DateTime newDate) {
+                                setState(() {
+                                  selectedDate = newDate;
+                                  _dateController.text = '${selectedDate.year}';
+                                });
+                              };
+                            },
+                          ),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
               Row(
                 children: [
+                  Spacer(),
                   Text(
                     'Images',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
-                  Spacer(),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 50,
                     width: 50,
@@ -477,6 +497,7 @@ class _QuotationReqestState extends State<QuotationReqest> {
                       ],
                     ),
                   ),
+                  Spacer(),
                 ],
               ),
               SizedBox(height: 10),
@@ -559,14 +580,17 @@ class _QuotationReqestState extends State<QuotationReqest> {
                   )
                 ],
               ),
-              TextField(
-                maxLines: 5,
-                controller: _partAddition,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  maxLines: 5,
+                  controller: _partAddition,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Addition',
                   ),
-                  labelText: 'Addition',
                 ),
               ),
               SizedBox(height: 20),
@@ -581,7 +605,7 @@ class _QuotationReqestState extends State<QuotationReqest> {
                           30), // Set the button's border radius
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(370, 65)),
+                  minimumSize: MaterialStateProperty.all<Size>(Size(500, 65)),
                   // Set the button's minimum size
                 ),
                 child: Text('Accept Order'),
