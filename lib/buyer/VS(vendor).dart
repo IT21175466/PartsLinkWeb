@@ -70,16 +70,15 @@ class _VendorSettingState extends State<VendorSetting> {
       }
     }
     return "";
-
   }
-  Future<void> logOut() async {
-      final storage = html.window.localStorage;
-      storage.remove('data2.json');
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => BuyerHomePage2()),
-      );
 
+  Future<void> logOut() async {
+    final storage = html.window.localStorage;
+    storage.remove('data2.json');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BuyerHomePage2()),
+    );
   }
 
   Future<void> updateUserData(uId, uName, uPass, uEmail) async {
@@ -149,60 +148,84 @@ class _VendorSettingState extends State<VendorSetting> {
                 ),
               ),
               const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Change Username',
-                  style: TextStyle(
-                    color: Color.fromARGB(169, 0, 0, 0),
-                    fontSize: 20,
-                  ),
+              Container(
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Text(
+                      'Change Username',
+                      style: TextStyle(
+                        color: Color.fromARGB(169, 0, 0, 0),
+                        fontSize: 20,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Container(
+                      width: 350,
+                      height: 60, // Adjust the height as per your requirement
+                      child: LoginField(
+                        hintText: '$usr',
+                        controller: _usernameController,
+                      ),
+                    ),
+                    Spacer(),
+                  ],
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 20),
               Container(
-                height: 60, // Adjust the height as per your requirement
-                child: LoginField(
-                  hintText: '$usr',
-                  controller: _usernameController,
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Container(
+                      child: Text(
+                        'Change Password',
+                        style: TextStyle(
+                          color: Color.fromARGB(169, 0, 0, 0),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 50),
+                    Container(
+                      width: 350,
+                      height: 60, // Adjust the height as per your requirement
+                      child: Password(
+                        hintText: '*********',
+                        controller: _passwordController,
+                      ),
+                    ),
+                    Spacer(),
+                  ],
                 ),
               ),
               const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Change Password',
-                  style: TextStyle(
-                    color: Color.fromARGB(169, 0, 0, 0),
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
               Container(
-                height: 60, // Adjust the height as per your requirement
-                child: Password(
-                  hintText: '*********',
-                  controller: _passwordController,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Change Email',
-                  style: TextStyle(
-                    color: Color.fromARGB(169, 0, 0, 0),
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                height: 60, // Adjust the height as per your requirement
-                child: LoginField(
-                  hintText: '$eml',
-                  controller: _emailController,
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Container(
+                      child: Text(
+                        'Change Email',
+                        style: TextStyle(
+                          color: Color.fromARGB(169, 0, 0, 0),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 90),
+                    Container(
+                      width: 350,
+                      height: 60, // Adjust the height as per your requirement
+                      child: LoginField(
+                        hintText: '$eml',
+                        controller: _emailController,
+                      ),
+                    ),
+                    Spacer(),
+                  ],
                 ),
               ),
               const SizedBox(height: 50),

@@ -243,8 +243,8 @@ class _RequestPartState extends State<RequestPart> {
           child: Column(
             children: [
               SizedBox(height: 20),
-              SizedBox(
-                width: 400,
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partName,
                   decoration: InputDecoration(
@@ -256,8 +256,8 @@ class _RequestPartState extends State<RequestPart> {
                 ),
               ),
               SizedBox(height: 10),
-              SizedBox(
-                width: 400,
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partNumber,
                   decoration: InputDecoration(
@@ -269,8 +269,8 @@ class _RequestPartState extends State<RequestPart> {
                 ),
               ),
               SizedBox(height: 10),
-              SizedBox(
-                width: 400,
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partDescription,
                   decoration: InputDecoration(
@@ -282,8 +282,8 @@ class _RequestPartState extends State<RequestPart> {
                 ),
               ),
               SizedBox(height: 10),
-              SizedBox(
-                width: 400,
+              Container(
+                width: 500,
                 child: TextField(
                   controller: countryController,
                   readOnly: true,
@@ -315,8 +315,8 @@ class _RequestPartState extends State<RequestPart> {
                 ),
               ),
               SizedBox(height: 10),
-              SizedBox(
-                width: 400,
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partModel,
                   decoration: InputDecoration(
@@ -328,8 +328,8 @@ class _RequestPartState extends State<RequestPart> {
                 ),
               ),
               SizedBox(height: 10),
-              SizedBox(
-                width: 400,
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _dateController,
                   readOnly: true,
@@ -387,11 +387,14 @@ class _RequestPartState extends State<RequestPart> {
               SizedBox(height: 20),
               Row(
                 children: [
+                  Spacer(),
                   Text(
                     'Images',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
-                  Spacer(),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 50,
                     width: 50,
@@ -416,6 +419,7 @@ class _RequestPartState extends State<RequestPart> {
                       ],
                     ),
                   ),
+                  Spacer(),
                 ],
               ),
               SizedBox(height: 10),
@@ -444,8 +448,8 @@ class _RequestPartState extends State<RequestPart> {
                   ),
                 ],
               ),
-              SizedBox(
-                width: 400,
+              Container(
+                width: 500,
                 child: TextField(
                   maxLines: 5,
                   controller: _partAddition,
@@ -457,7 +461,7 @@ class _RequestPartState extends State<RequestPart> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               GestureDetector(
                 onTap: () async {
                   var partname = _partName.text.trim();
@@ -493,12 +497,12 @@ class _RequestPartState extends State<RequestPart> {
                   }
                 },
                 child: Container(
-                  width: 400,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(150),
                     color: const Color.fromARGB(255, 57, 55, 70),
                   ),
-                  height: 50,
+                  height: 80,
+                  width: 500,
                   child: Row(
                     children: [
                       SizedBox(width: 10),
@@ -506,8 +510,8 @@ class _RequestPartState extends State<RequestPart> {
                       Text(
                         "Next",
                         style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
                       ),
