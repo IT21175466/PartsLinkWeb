@@ -428,12 +428,14 @@ class _QuotationRequestState extends State<QuotationRequest> {
                 width: 500,
                 child: TextField(
                   controller: _dateController,
-                  readOnly: true,
+                  keyboardType: TextInputType.number,
+                  maxLength: 4,
+                  // readOnly: true,
                   decoration: InputDecoration(
                     // ignore: unnecessary_null_comparison
                     hintText: selectedDate == null
-                        ? '${selectedDate.year}'
-                        : 'Select Year',
+                        ? 'Select Year'
+                        : selectedDate.year.toString(),
                     hintStyle: TextStyle(
                       color: Colors.black,
                     ),
@@ -455,7 +457,7 @@ class _QuotationRequestState extends State<QuotationRequest> {
                                         setState(() {
                                           selectedDate = newDate;
                                           _dateController.text =
-                                              '${selectedDate.year}';
+                                              selectedDate.year.toString();
                                         });
                                       },
                                       mode: CupertinoDatePickerMode.date,
@@ -468,15 +470,16 @@ class _QuotationRequestState extends State<QuotationRequest> {
                         : IconButton(
                             icon: Icon(Icons.edit_calendar_rounded),
                             onPressed: () {
-                              _showDatePicker(context);
-                              (DateTime newDate) {
-                                setState(() {
-                                  selectedDate = newDate;
-                                  _dateController.text = '${selectedDate.year}';
-                                });
-                              };
+                              // _showDatePicker(context);
+                              // (DateTime newDate) {
+                              //   setState(() {
+                              //     selectedDate = newDate;
+                              //     _dateController.text = selectedDate.year.toString();
+                              //   });
+                              // };
                             },
                           ),
+                    labelText: 'Year of Make',
                   ),
                 ),
               ),
