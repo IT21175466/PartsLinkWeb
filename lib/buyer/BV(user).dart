@@ -183,7 +183,7 @@ class _BuyerBaseViewState extends State<BuyerBaseView> {
                             ),
                             SizedBox(height: 8.0),
                             Text(
-                              'Part Number: ${item['part_number']}',
+                              'Price: ${item['part_number']}',
                               style: TextStyle(
                                 fontSize: 25.0,
                                 color: Colors.white,

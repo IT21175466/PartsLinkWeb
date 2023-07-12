@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -273,7 +272,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   Text(partName,
                       style: TextStyle(fontSize: 20, color: Color(0xFF877DAD))),
                   SizedBox(height: 30),
-                  Text('Part Number:',
+                  Text('Price:',
                       style: TextStyle(fontSize: 20, color: Colors.black)),
                   Text(partNumber,
                       style: TextStyle(fontSize: 20, color: Color(0xFF877DAD))),

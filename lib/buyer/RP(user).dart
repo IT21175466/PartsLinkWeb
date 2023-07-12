@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:html' as html;
+import 'package:flutter/services.dart';
 
 class RequestPart extends StatefulWidget {
   const RequestPart({super.key});
@@ -25,7 +26,15 @@ class _RequestPartState extends State<RequestPart> {
   final ImagePicker imagePicker = ImagePicker();
 
   List<PlatformFile> imageFileList = [];
+  bool? isCheckedBNew = false;
+  bool? isCheckedRecondition = false;
+  bool? isCheckedLocally = false;
+  String?
+      selectedStringValue; // Assigning a number to this variable upon the checkbox1
+  String? selectedStringValue2; // assign 2
+  String? selectedStringValue3; // assign 3 .......check boxes
 
+  String condition_id = "";
   TextEditingController _dateController = TextEditingController();
   TextEditingController countryController = TextEditingController();
   TextEditingController _partName = TextEditingController();
@@ -37,6 +46,7 @@ class _RequestPartState extends State<RequestPart> {
   bool? check1 = false;
   bool? check2 = false;
   bool? check3 = false;
+  String state = "";
   @override
   void initState() {
     super.initState();
@@ -161,8 +171,10 @@ class _RequestPartState extends State<RequestPart> {
       String para_date,
       String para_img,
       String para_addition,
-      String user_ID) async {
+      String user_ID,
+      String condition) async {
     print("aawaa");
+    print(condition);
     var url =
         'https://my.partscart.lk/reqPart.php'; // Replace with your API endpoint
 
@@ -182,6 +194,7 @@ class _RequestPartState extends State<RequestPart> {
       'part_addition': para_addition,
       'user_ID': userID,
       'date_time': formattedDateTime,
+      'condition': condition,
     };
 
     var response = await http.post(Uri.parse(url), body: data);
@@ -266,7 +279,7 @@ class _RequestPartState extends State<RequestPart> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: 'Part Number',
+                    labelText: 'Price',
                   ),
                 ),
               ),
@@ -334,12 +347,16 @@ class _RequestPartState extends State<RequestPart> {
                 width: 500,
                 child: TextField(
                   controller: _dateController,
-                  readOnly: true,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+
+                  maxLength: 4,
+                  // readOnly: true,
                   decoration: InputDecoration(
                     // ignore: unnecessary_null_comparison
                     hintText: selectedDate == null
-                        ? '${selectedDate.year}'
-                        : 'Select Year',
+                        ? 'Select Year'
+                        : selectedDate.year.toString(),
                     hintStyle: TextStyle(
                       color: Colors.black,
                     ),
@@ -361,7 +378,7 @@ class _RequestPartState extends State<RequestPart> {
                                         setState(() {
                                           selectedDate = newDate;
                                           _dateController.text =
-                                              '${selectedDate.year}';
+                                              selectedDate.year.toString();
                                         });
                                       },
                                       mode: CupertinoDatePickerMode.date,
@@ -374,15 +391,16 @@ class _RequestPartState extends State<RequestPart> {
                         : IconButton(
                             icon: Icon(Icons.edit_calendar_rounded),
                             onPressed: () {
-                              _showDatePicker(context);
-                              (DateTime newDate) {
-                                setState(() {
-                                  selectedDate = newDate;
-                                  _dateController.text = '${selectedDate.year}';
-                                });
-                              };
+                              // _showDatePicker(context);
+                              // (DateTime newDate) {
+                              //   setState(() {
+                              //     selectedDate = newDate;
+                              //     _dateController.text = selectedDate.year.toString();
+                              //   });
+                              // };
                             },
                           ),
+                    labelText: 'Year of Make',
                   ),
                 ),
               ),
@@ -467,47 +485,58 @@ class _RequestPartState extends State<RequestPart> {
               Container(
                 width: 450,
                 child: CheckboxListTile(
-                  value: check1,
-                  controlAffinity:
-                      ListTileControlAffinity.leading, //checkbox at left
-                  onChanged: (bool? value) {
-                    setState(() {
-                      check1 = value;
-                    });
-                  },
                   title: Text("Brand New"),
+                  value: isCheckedBNew,
+                  onChanged: (bool? newBool) {
+                    setState(() {
+                      isCheckedBNew = newBool;
+                      if (newBool == true) {
+                        selectedStringValue = "5";
+                      } else {
+                        selectedStringValue = null;
+                      }
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
                 ),
               ),
               SizedBox(height: 15),
               Container(
                 width: 450,
                 child: CheckboxListTile(
-                  value: check2,
-                  controlAffinity:
-                      ListTileControlAffinity.leading, //checkbox at left
-                  onChanged: (bool? value) {
-                    setState(() {
-                      check2 = value;
-                    });
-                  },
                   title: Text("Recondition"),
+                  value: isCheckedRecondition,
+                  onChanged: (bool? newBool) {
+                    setState(() {
+                      isCheckedRecondition = newBool;
+                      if (newBool == true) {
+                        selectedStringValue2 = "6";
+                      } else {
+                        selectedStringValue2 = null;
+                      }
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
                 ),
               ),
               SizedBox(height: 15),
               Container(
-                width: 450,
-                child: CheckboxListTile(
-                  value: check3,
-                  controlAffinity:
-                      ListTileControlAffinity.leading, //checkbox at left
-                  onChanged: (bool? value) {
-                    setState(() {
-                      check3 = value;
-                    });
-                  },
-                  title: Text("Locally used"),
-                ),
-              ),
+                  width: 450,
+                  child: CheckboxListTile(
+                    title: Text("Locally used"),
+                    value: isCheckedLocally,
+                    onChanged: (bool? newBool) {
+                      setState(() {
+                        isCheckedLocally = newBool;
+                        if (newBool == true) {
+                          selectedStringValue3 = "7";
+                        } else {
+                          selectedStringValue3 = null;
+                        }
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,
+                  )),
               SizedBox(height: 15),
               GestureDetector(
                 onTap: () async {
@@ -530,7 +559,12 @@ class _RequestPartState extends State<RequestPart> {
                       year.isEmpty) {
                     _wrongCredentials();
                   } else {
-                    await sendDataToApi(
+                    if (isCheckedBNew == true &&
+                        isCheckedRecondition == false &&
+                        isCheckedLocally == false) {
+                      condition_id = "4";
+                      debugPrint(condition_id);
+                      await sendDataToApi(
                         partname,
                         partnum,
                         partdesc,
@@ -539,7 +573,116 @@ class _RequestPartState extends State<RequestPart> {
                         year,
                         partimg,
                         partaddition,
-                        userID);
+                        userID,
+                        condition_id,
+                      );
+                    } else if (isCheckedBNew == true &&
+                        isCheckedRecondition == true &&
+                        isCheckedLocally == false) {
+                      condition_id = "5";
+                      debugPrint(condition_id);
+                      await sendDataToApi(
+                        partname,
+                        partnum,
+                        partdesc,
+                        partcountry,
+                        partmodel,
+                        year,
+                        partimg,
+                        partaddition,
+                        userID,
+                        condition_id,
+                      );
+                    } else if (isCheckedBNew == true &&
+                        isCheckedRecondition == true &&
+                        isCheckedLocally == true) {
+                      condition_id = "6";
+                      debugPrint(condition_id);
+                      await sendDataToApi(
+                        partname,
+                        partnum,
+                        partdesc,
+                        partcountry,
+                        partmodel,
+                        year,
+                        partimg,
+                        partaddition,
+                        userID,
+                        condition_id,
+                      );
+                    } else if (isCheckedBNew == false &&
+                        isCheckedRecondition == true &&
+                        isCheckedLocally == false) {
+                      condition_id = "7";
+                      debugPrint(condition_id);
+                      await sendDataToApi(
+                        partname,
+                        partnum,
+                        partdesc,
+                        partcountry,
+                        partmodel,
+                        year,
+                        partimg,
+                        partaddition,
+                        userID,
+                        condition_id,
+                      );
+                    } else if (isCheckedBNew == false &&
+                        isCheckedRecondition == true &&
+                        isCheckedLocally == true) {
+                      condition_id = "8";
+                      debugPrint(condition_id);
+                      await sendDataToApi(
+                        partname,
+                        partnum,
+                        partdesc,
+                        partcountry,
+                        partmodel,
+                        year,
+                        partimg,
+                        partaddition,
+                        userID,
+                        condition_id,
+                      );
+                    } else if (isCheckedBNew == true &&
+                        isCheckedRecondition == false &&
+                        isCheckedLocally == true) {
+                      condition_id = "9";
+                      debugPrint(condition_id);
+                      await sendDataToApi(
+                        partname,
+                        partnum,
+                        partdesc,
+                        partcountry,
+                        partmodel,
+                        year,
+                        partimg,
+                        partaddition,
+                        userID,
+                        condition_id,
+                      );
+                    } else if (isCheckedBNew == false &&
+                        isCheckedRecondition == false &&
+                        isCheckedLocally == true) {
+                      condition_id = "10";
+                      debugPrint(condition_id);
+                      await sendDataToApi(
+                        partname,
+                        partnum,
+                        partdesc,
+                        partcountry,
+                        partmodel,
+                        year,
+                        partimg,
+                        partaddition,
+                        userID,
+                        condition_id,
+                      );
+                    } else {
+                      _wrongCredentials();
+                      return;
+                    }
+
                     // print("$year");
                   }
                 },

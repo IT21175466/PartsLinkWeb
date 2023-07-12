@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:html' as html;
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
+import 'package:flutter/services.dart';
 
 class QuotationRequest extends StatefulWidget {
   const QuotationRequest({Key? key}) : super(key: key);
@@ -360,7 +361,7 @@ class _QuotationRequestState extends State<QuotationRequest> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: 'Part Number',
+                    labelText: 'Price',
                   ),
                 ),
               ),
@@ -429,6 +430,8 @@ class _QuotationRequestState extends State<QuotationRequest> {
                 child: TextField(
                   controller: _dateController,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+
                   maxLength: 4,
                   // readOnly: true,
                   decoration: InputDecoration(

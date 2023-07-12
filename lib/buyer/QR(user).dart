@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:gap/utils/device.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart';
 
 class QuotationReqest extends StatefulWidget {
   const QuotationReqest({super.key});
@@ -342,7 +343,7 @@ class _QuotationReqestState extends State<QuotationReqest> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: 'Part Number',
+                    labelText: 'Price',
                   ),
                 ),
               ),
@@ -410,12 +411,16 @@ class _QuotationReqestState extends State<QuotationReqest> {
                 width: 500,
                 child: TextField(
                   controller: _dateController,
-                  readOnly: true,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+
+                  maxLength: 4,
+                  // readOnly: true,
                   decoration: InputDecoration(
                     // ignore: unnecessary_null_comparison
                     hintText: selectedDate == null
-                        ? '${selectedDate.year}'
-                        : 'Select Year',
+                        ? 'Select Year'
+                        : selectedDate.year.toString(),
                     hintStyle: TextStyle(
                       color: Colors.black,
                     ),
@@ -437,7 +442,7 @@ class _QuotationReqestState extends State<QuotationReqest> {
                                         setState(() {
                                           selectedDate = newDate;
                                           _dateController.text =
-                                              '${selectedDate.year}';
+                                              selectedDate.year.toString();
                                         });
                                       },
                                       mode: CupertinoDatePickerMode.date,
@@ -450,15 +455,16 @@ class _QuotationReqestState extends State<QuotationReqest> {
                         : IconButton(
                             icon: Icon(Icons.edit_calendar_rounded),
                             onPressed: () {
-                              _showDatePicker(context);
-                              (DateTime newDate) {
-                                setState(() {
-                                  selectedDate = newDate;
-                                  _dateController.text = '${selectedDate.year}';
-                                });
-                              };
+                              // _showDatePicker(context);
+                              // (DateTime newDate) {
+                              //   setState(() {
+                              //     selectedDate = newDate;
+                              //     _dateController.text = selectedDate.year.toString();
+                              //   });
+                              // };
                             },
                           ),
+                    labelText: 'Year of Make',
                   ),
                 ),
               ),

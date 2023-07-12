@@ -11,6 +11,7 @@ class BuyerBaseView extends StatefulWidget {
   @override
   _BuyerBaseViewState createState() => _BuyerBaseViewState();
 }
+
 class _BuyerBaseViewState extends State<BuyerBaseView> {
   List<dynamic> carouselItems = [];
   int _currentSlide = 0;
@@ -54,6 +55,7 @@ class _BuyerBaseViewState extends State<BuyerBaseView> {
       // Handle error
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final heightFactor = DeviceUtils.getHeightFactor(context);
@@ -104,9 +106,8 @@ class _BuyerBaseViewState extends State<BuyerBaseView> {
                 ),
               ),
               onTap: () {
-                    Navigator.of(context).push(CupertinoPageRoute<void>(
-                        builder: (BuildContext context) => LoginPage2()));
-
+                Navigator.of(context).push(CupertinoPageRoute<void>(
+                    builder: (BuildContext context) => LoginPage2()));
               },
             ),
             SizedBox(
@@ -132,7 +133,7 @@ class _BuyerBaseViewState extends State<BuyerBaseView> {
                 alignment: Alignment.center,
                 height: 300 * heightFactor,
                 width: 400 * widthFactor,
-                color: Color.fromRGBO(0,0,0,1),
+                color: Color.fromRGBO(0, 0, 0, 1),
                 child: Stack(
                   children: [
                     Container(
@@ -158,7 +159,7 @@ class _BuyerBaseViewState extends State<BuyerBaseView> {
             SizedBox(
               height: 50 * heightFactor,
             ),
-         CarouselSlider(
+            CarouselSlider(
               items: carouselItems.map((item) {
                 return Builder(
                   builder: (BuildContext context) {
@@ -195,7 +196,7 @@ class _BuyerBaseViewState extends State<BuyerBaseView> {
                             ),
                             SizedBox(height: 8.0),
                             Text(
-                              'Part Number: ${item['part_number']}',
+                              'Price: ${item['part_number']}',
                               style: TextStyle(
                                 fontSize: 25.0,
                                 color: Colors.white,
@@ -251,7 +252,7 @@ class _BuyerBaseViewState extends State<BuyerBaseView> {
                 );
               }).toList(),
             ),
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
