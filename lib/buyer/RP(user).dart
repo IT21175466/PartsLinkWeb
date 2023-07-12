@@ -34,7 +34,9 @@ class _RequestPartState extends State<RequestPart> {
   TextEditingController _partModel = TextEditingController();
   TextEditingController _partAddition = TextEditingController();
   String userID = "";
-
+  bool? check1 = false;
+  bool? check2 = false;
+  bool? check3 = false;
   @override
   void initState() {
     super.initState();
@@ -461,7 +463,52 @@ class _RequestPartState extends State<RequestPart> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 15),
+              Container(
+                width: 450,
+                child: CheckboxListTile(
+                  value: check1,
+                  controlAffinity:
+                      ListTileControlAffinity.leading, //checkbox at left
+                  onChanged: (bool? value) {
+                    setState(() {
+                      check1 = value;
+                    });
+                  },
+                  title: Text("Brand New"),
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                width: 450,
+                child: CheckboxListTile(
+                  value: check2,
+                  controlAffinity:
+                      ListTileControlAffinity.leading, //checkbox at left
+                  onChanged: (bool? value) {
+                    setState(() {
+                      check2 = value;
+                    });
+                  },
+                  title: Text("Recondition"),
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                width: 450,
+                child: CheckboxListTile(
+                  value: check3,
+                  controlAffinity:
+                      ListTileControlAffinity.leading, //checkbox at left
+                  onChanged: (bool? value) {
+                    setState(() {
+                      check3 = value;
+                    });
+                  },
+                  title: Text("Locally used"),
+                ),
+              ),
+              SizedBox(height: 15),
               GestureDetector(
                 onTap: () async {
                   var partname = _partName.text.trim();
