@@ -159,10 +159,10 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
     );
   }
 
-  Future<String> getFilePath() async {
-    final directory = await getTemporaryDirectory();
-    return directory.path + '/notify_ID.json';
-  }
+  // Future<String> getFilePath() async {
+  //   final directory = await getTemporaryDirectory();
+  //   return directory.path + '/notify_ID.json';
+  // }
 
   String notify_ID = "";
   Future<void> loadRequestId() async {
@@ -328,93 +328,114 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                     TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 20),
-              TextField(
-                controller: _partName,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: '$partName',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _partNumber,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: '$partNumber',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _partDescription,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: '$partDescription',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: countryController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  hintText: selectedCountry != null
-                      ? '${selectedCountry!.name}'
-                      : 'Country',
-                  hintStyle: TextStyle(
-                    color: Colors.black,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      showCountryPicker(
-                        context: context,
-                        showPhoneCode: false,
-                        onSelect: (Country country) {
-                          setState(() {
-                            selectedCountry = country;
-                          });
-                        },
-                      );
-                    },
-                    icon: Icon(Icons.adaptive.arrow_forward),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partName,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: '$partName',
                   ),
                 ),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _partModel,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partNumber,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: '$partNumber',
                   ),
-                  labelText: '$partModel',
                 ),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _partYear,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partDescription,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: '$partDescription',
                   ),
-                  labelText: '$partYear',
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: countryController,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    hintText: selectedCountry != null
+                        ? '${selectedCountry!.name}'
+                        : 'Country',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        showCountryPicker(
+                          context: context,
+                          showPhoneCode: false,
+                          onSelect: (Country country) {
+                            setState(() {
+                              selectedCountry = country;
+                            });
+                          },
+                        );
+                      },
+                      icon: Icon(Icons.adaptive.arrow_forward),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partModel,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: '$partModel',
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partYear,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: '$partYear',
+                  ),
                 ),
               ),
               SizedBox(height: 20),
               Row(
                 children: [
+                  Spacer(),
                   Text(
                     'Images',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
-                  Spacer(),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 50,
                     width: 50,
@@ -439,6 +460,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                       ],
                     ),
                   ),
+                  Spacer(),
                 ],
               ),
               SizedBox(height: 10),
@@ -467,14 +489,17 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                   ),
                 ],
               ),
-              TextField(
-                maxLines: 5,
-                controller: _partAddition,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  maxLines: 5,
+                  controller: _partAddition,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: '$partAddition',
                   ),
-                  labelText: '$partAddition',
                 ),
               ),
               SizedBox(height: 20),
@@ -491,7 +516,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                           30), // Set the button's border radius
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(370, 65)),
+                  minimumSize: MaterialStateProperty.all<Size>(Size(500, 65)),
                   // Set the button's minimum size
                 ),
                 child: Text('Accept Order'),

@@ -118,11 +118,10 @@ class _LoginPageState2 extends State<LoginPage2> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  const SizedBox(height: 20),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 13),
-                    width: double.infinity,
-                    height: 60,
+                    width: 450,
+                    // height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
@@ -135,7 +134,7 @@ class _LoginPageState2 extends State<LoginPage2> {
                           'User Type',
                           style: TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.w400,
+                            // fontWeight: FontWeight.w400,
                             fontSize: 16,
                           ),
                         ),
@@ -170,10 +169,60 @@ class _LoginPageState2 extends State<LoginPage2> {
                       ],
                     ),
                   ),
+                  // Container(
+                  //   padding: EdgeInsets.symmetric(horizontal: 13),
+                  //   width: double.infinity,
+                  //   height: 60,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.circular(10),
+                  //     border: Border.all(
+                  //       color: Colors.black,
+                  //     ),
+                  //   ),
+                  //   child: Row(
+                  //     children: [
+                  //       Text(
+                  //         'User Type',
+                  //         style: TextStyle(
+                  //           color: Colors.black,
+                  //           fontWeight: FontWeight.w400,
+                  //           fontSize: 16,
+                  //         ),
+                  //       ),
+                  //       Spacer(),
+                  //       DropdownButton<String>(
+                  //         value: selectedItem,
+                  //         icon: Icon(Icons.adaptive.arrow_forward),
+
+                  //         iconSize: 24,
+                  //         elevation: 16,
+
+                  //         style: TextStyle(color: Colors.black),
+                  //         underline: SizedBox(), // Remove the default underline
+                  //         onChanged: (String? newValue) {
+                  //           setState(() {
+                  //             selectedItem = newValue!;
+                  //             debugPrint(selectedItem);
+                  //           });
+                  //         },
+                  //         items: ['user', 'vendor']
+                  //             .map<DropdownMenuItem<String>>((String value) {
+                  //           return DropdownMenuItem<String>(
+                  //             value: value,
+                  //             child: Padding(
+                  //               padding: EdgeInsets.symmetric(
+                  //                   horizontal: 16, vertical: 8),
+                  //               child: Text(value),
+                  //             ),
+                  //           );
+                  //         }).toList(),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
                   Container(
-                    width: double
-                        .infinity, // Set the desired width for the username field
+                    width: 450, // Set the desired width for the username field
 
                     child: TextField(
                       controller: _usernameController,
@@ -194,8 +243,7 @@ class _LoginPageState2 extends State<LoginPage2> {
                   ),
                   const SizedBox(height: 20),
                   Container(
-                    width: double
-                        .infinity, // Set the desired width for the password field
+                    width: 450, // Set the desired width for the password field
                     child: TextField(
                       controller: _passwordController,
                       obscureText: true,
@@ -216,7 +264,7 @@ class _LoginPageState2 extends State<LoginPage2> {
                   ),
                   const SizedBox(height: 50),
                   Container(
-                    width: double.infinity,
+                    width: 450,
                     child: ElevatedButton(
                       onPressed: () {
                         String username = _usernameController.text;
@@ -269,7 +317,7 @@ class _LoginPageState2 extends State<LoginPage2> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
                       // Perform the desired action when the text is pressed
@@ -289,7 +337,7 @@ class _LoginPageState2 extends State<LoginPage2> {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height: 20),
                         Text(
                           "All rights reserved @GAP",
                           style: TextStyle(

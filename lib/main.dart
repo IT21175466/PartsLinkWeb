@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'buyer/buyer_home_page_Android_IOS.dart';
+import 'package:gap/buyer/HS(home).dart';
+import 'package:gap/buyer/HS(user).dart';
+import 'package:gap/buyer/HS(vendor).dart';
 
+import 'buyer/buyer_home_page_Android_IOS.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +20,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: BuyerHomePage2(),
+      // home:usSellingsPage(),
+      // home:venSellingsPage(),
+      home: HotSellingsPage(),
+      
     );
   }
 }
+ 

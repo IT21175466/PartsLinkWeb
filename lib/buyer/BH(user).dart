@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/buyer/HS(user).dart';
 import 'BV(user).dart';
 // import 'package:gap/ui/buyer/apr/settings_tile.dart';
 import '/utils/device.dart';
@@ -25,7 +26,7 @@ class BuyerHomePage3 extends StatelessWidget {
                 height: 20 * heightFactor,
               ),
               ProfileTile(),
-              BuyerBaseView(),
+              usSellingsPage(),
             ],
           ),
         ),

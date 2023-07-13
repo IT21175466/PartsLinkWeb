@@ -1,3 +1,4 @@
+import 'package:gap/buyer/HS(home).dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
@@ -76,7 +77,7 @@ class _UserSettingState2 extends State<UserSetting2> {
     storage.remove('data.json');
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => BuyerHomePage2()),
+      MaterialPageRoute(builder: (context) => HotSellingsPage()),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/buyer/HS(vendor).dart';
 import 'BV(vendor).dart';
 import 'ST(vendor).dart';
 import '/utils/device.dart';
@@ -24,7 +25,7 @@ class VendorHomePage extends StatelessWidget {
                 height: 20 * heightFactor,
               ),
               ProfileTile(),
-              VendorBaseView(),
+              venSellingsPage(),
             ],
           ),
         ),
