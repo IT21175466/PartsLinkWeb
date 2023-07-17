@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:html' as html;
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
-
+import 'package:flutter/services.dart';
 
 class QuotationRequest extends StatefulWidget {
   const QuotationRequest({Key? key}) : super(key: key);
@@ -18,7 +18,8 @@ class QuotationRequest extends StatefulWidget {
 }
 
 class _QuotationRequestState extends State<QuotationRequest> {
-  List<String> _uploadedImageUrls = []; // Declare _uploadedImageUrls as an instance variable
+  List<String> _uploadedImageUrls =
+      []; // Declare _uploadedImageUrls as an instance variable
 
   bool? isCheckedBNew = false;
   bool? isCheckedRecondition = false;
@@ -34,7 +35,8 @@ class _QuotationRequestState extends State<QuotationRequest> {
   TextEditingController _partModel = TextEditingController();
   TextEditingController _partAddition = TextEditingController();
   String userID = "";
-  String? selectedStringValue; // Assigning a number to this variable upon the checkbox1
+  String?
+      selectedStringValue; // Assigning a number to this variable upon the checkbox1
   String? selectedStringValue2; // assign 2
   String? selectedStringValue3; // assign 3 .......check boxes
 
@@ -75,66 +77,66 @@ class _QuotationRequestState extends State<QuotationRequest> {
     );
   }
 
-void selectImages() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
-    type: FileType.image,
-    allowMultiple: true,
-  );
-
-  if (result != null && result.files.isNotEmpty) {
-    List<PlatformFile> pickedFiles = result.files;
-    imageFileList.addAll(pickedFiles);
-
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Uploading Images'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 10),
-              Text('Uploading...'),
-            ],
-          ),
-        );
-      },
+  void selectImages() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: true,
     );
 
-    for (int index = 0; index < imageFileList.length; index++) {
-      await uploadImage(imageFileList[index]);
+    if (result != null && result.files.isNotEmpty) {
+      List<PlatformFile> pickedFiles = result.files;
+      imageFileList.addAll(pickedFiles);
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Uploading Images'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 10),
+                Text('Uploading...'),
+              ],
+            ),
+          );
+        },
+      );
+
+      for (int index = 0; index < imageFileList.length; index++) {
+        await uploadImage(imageFileList[index]);
+      }
+
+      Navigator.of(context).pop(); // Close the uploading dialog
     }
 
-    Navigator.of(context).pop(); // Close the uploading dialog
+    setState(() {});
   }
 
-  setState(() {});
-}
+  Future<void> uploadImage(PlatformFile platformFile) async {
+    final bytes = platformFile.bytes;
+    if (bytes == null) return;
 
-Future<void> uploadImage(PlatformFile platformFile) async {
-  final bytes = platformFile.bytes;
-  if (bytes == null) return;
+    final url = Uri.parse(
+        'https://my.partscart.lk/uploadFiles.php'); // Replace with your PHP script URL
+    final request = http.MultipartRequest('POST', url);
+    request.files.add(http.MultipartFile.fromBytes(
+      'image',
+      bytes,
+      filename: platformFile.name,
+    ));
 
-  final url = Uri.parse('https://my.partscart.lk/uploadFiles.php'); // Replace with your PHP script URL
-  final request = http.MultipartRequest('POST', url);
-  request.files.add(http.MultipartFile.fromBytes(
-    'image',
-    bytes,
-    filename: platformFile.name,
-  ));
-
-  final response = await request.send();
-  if (response.statusCode == 200) {
-    final imageUrl = await response.stream.bytesToString();
-    setState(() {
-      _uploadedImageUrls.add(imageUrl);
-    });
-    print(_uploadedImageUrls);
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      final imageUrl = await response.stream.bytesToString();
+      setState(() {
+        _uploadedImageUrls.add(imageUrl);
+      });
+      print(_uploadedImageUrls);
+    }
   }
-}
-
 
   Future<void> _showDatePicker(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -172,33 +174,32 @@ Future<void> uploadImage(PlatformFile platformFile) async {
       },
     );
   }
+
   String req_ID = '';
-Future<void> loadRequestId(paraCountry) async {
-  final storage = html.window.localStorage;
-  String? storedData = storage['requestID.json'];
-  if (storedData != null) {
-    try {
-      dynamic jsonData = jsonDecode(storedData);
-      if (jsonData is List<dynamic>) {
-        List<dynamic> dataList = jsonData;
-        for (var item in dataList) {
-          req_ID = item['request_id'] as String;
+  Future<void> loadRequestId(paraCountry) async {
+    final storage = html.window.localStorage;
+    String? storedData = storage['requestID.json'];
+    if (storedData != null) {
+      try {
+        dynamic jsonData = jsonDecode(storedData);
+        if (jsonData is List<dynamic>) {
+          List<dynamic> dataList = jsonData;
+          for (var item in dataList) {
+            req_ID = item['request_id'] as String;
+            _process(paraCountry);
+          }
+        } else if (jsonData is Map<String, dynamic>) {
+          Map<String, dynamic> dataMap = jsonData;
+          req_ID = dataMap['request_id'] as String;
           _process(paraCountry);
+        } else {
+          print('Invalid data format in "requestID.json"');
         }
-      } else if (jsonData is Map<String, dynamic>) {
-        Map<String, dynamic> dataMap = jsonData;
-        req_ID = dataMap['request_id'] as String;
-        _process(paraCountry);
-      } else {
-        print('Invalid data format in "requestID.json"');
+      } catch (e) {
+        print('Error loading request ID: $e');
       }
-    } catch (e) {
-      print('Error loading request ID: $e');
     }
   }
-}
-
-
 
   Future<String> getTheVendorID() async {
     final storage = html.window.localStorage;
@@ -231,11 +232,11 @@ Future<void> loadRequestId(paraCountry) async {
     var condition_id = "";
 
     if (partname.isEmpty ||
-        partnum.isEmpty ||
-        partdesc.isEmpty ||
-        partcountry.isEmpty ||
-        partmodel.isEmpty ||
-        year.isEmpty
+            partnum.isEmpty ||
+            partdesc.isEmpty ||
+            partcountry.isEmpty ||
+            partmodel.isEmpty ||
+            year.isEmpty
         // year.isEmpty
         ) {
       _wrongCredentials();
@@ -253,7 +254,7 @@ Future<void> loadRequestId(paraCountry) async {
       } else if (isCheckedBNew == true &&
           isCheckedRecondition == true &&
           isCheckedLocally == true) {
-condition_id = "6";
+        condition_id = "6";
         debugPrint(condition_id);
       } else if (isCheckedBNew == false &&
           isCheckedRecondition == true &&
@@ -339,137 +340,163 @@ condition_id = "6";
           child: Column(
             children: [
               SizedBox(height: 20),
-              TextField(
-                controller: _partName,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Part Name',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _partNumber,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Part Number',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: _partDescription,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  labelText: 'Description',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: countryController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  hintText: selectedCountry != null
-                      ? '${selectedCountry!.name}'
-                      : 'Select Country',
-                  hintStyle: TextStyle(
-                    color: Colors.black,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      showCountryPicker(
-                        context: context,
-                        showPhoneCode: false,
-                        onSelect: (Country country) {
-                          setState(() {
-                            selectedCountry = country;
-                          });
-                        },
-                      );
-                    },
-                    icon: Icon(Icons.adaptive.arrow_forward),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partName,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Part Name',
                   ),
                 ),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _partModel,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partNumber,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Price',
                   ),
-                  labelText: 'Model',
                 ),
               ),
               SizedBox(height: 10),
-              TextField(
-                controller: _dateController,
-                readOnly: true,
-                decoration: InputDecoration(
-                  // ignore: unnecessary_null_comparison
-                  hintText: selectedDate == null
-                      ? '${selectedDate.year}'
-                      : 'Select Year',
-                  hintStyle: TextStyle(
-                    color: Colors.black,
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partDescription,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Description',
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  suffixIcon: isIOS
-                      ? IconButton(
-                          icon: Icon(Icons.edit_calendar_outlined),
-                          onPressed: () {
-                            showCupertinoModalPopup(
-                              context: context,
-                              builder: (BuildContext builder) {
-                                return Container(
-                                  height: 300,
-                                  child: CupertinoDatePicker(
-                                    initialDateTime: selectedDate,
-                                    onDateTimeChanged: (DateTime newDate) {
-                                      setState(() {
-                                        selectedDate = newDate;
-                                        _dateController.text =
-                                            '${selectedDate.year}';
-                                      });
-                                    },
-                                    mode: CupertinoDatePickerMode.date,
-                                  ),
-                                );
-                              },
-                            );
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: countryController,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    hintText: selectedCountry != null
+                        ? '${selectedCountry!.name}'
+                        : 'Select Country',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        showCountryPicker(
+                          context: context,
+                          showPhoneCode: false,
+                          onSelect: (Country country) {
+                            setState(() {
+                              selectedCountry = country;
+                            });
                           },
-                        )
-                      : IconButton(
-                          icon: Icon(Icons.edit_calendar_rounded),
-                          onPressed: () {
-                            _showDatePicker(context);
-                            (DateTime newDate) {
-                              setState(() {
-                                selectedDate = newDate;
-                                _dateController.text = '${selectedDate.year}';
-                              });
-                            };
-                          },
-                        ),
+                        );
+                      },
+                      icon: Icon(Icons.adaptive.arrow_forward),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _partModel,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Model',
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: TextField(
+                  controller: _dateController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+
+                  maxLength: 4,
+                  // readOnly: true,
+                  decoration: InputDecoration(
+                    // ignore: unnecessary_null_comparison
+                    hintText: selectedDate == null
+                        ? 'Select Year'
+                        : selectedDate.year.toString(),
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: isIOS
+                        ? IconButton(
+                            icon: Icon(Icons.edit_calendar_outlined),
+                            onPressed: () {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (BuildContext builder) {
+                                  return Container(
+                                    height: 300,
+                                    child: CupertinoDatePicker(
+                                      initialDateTime: selectedDate,
+                                      onDateTimeChanged: (DateTime newDate) {
+                                        setState(() {
+                                          selectedDate = newDate;
+                                          _dateController.text =
+                                              selectedDate.year.toString();
+                                        });
+                                      },
+                                      mode: CupertinoDatePickerMode.date,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          )
+                        : IconButton(
+                            icon: Icon(Icons.edit_calendar_rounded),
+                            onPressed: () {
+                              // _showDatePicker(context);
+                              // (DateTime newDate) {
+                              //   setState(() {
+                              //     selectedDate = newDate;
+                              //     _dateController.text = selectedDate.year.toString();
+                              //   });
+                              // };
+                            },
+                          ),
+                    labelText: 'Year of Make',
+                  ),
                 ),
               ),
               SizedBox(height: 20),
               Row(
                 children: [
+                  Spacer(),
                   Text(
                     'Images',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
-                  Spacer(),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Container(
                     height: 50,
                     width: 50,
@@ -494,6 +521,7 @@ condition_id = "6";
                       ],
                     ),
                   ),
+                  Spacer(),
                 ],
               ),
               SizedBox(height: 10),
@@ -519,75 +547,85 @@ condition_id = "6";
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                     ),
-
-
                   ),
                 ],
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child:Text(
+              Center(
+                child: Text(
                   'Select Condition',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
               ),
-              Column(
-                children: [
-                  CheckboxListTile(
-                    title: Text("Brand New"),
-                    value: isCheckedBNew,
-                    onChanged: (bool? newBool) {
-                      setState(() {
-                        isCheckedBNew = newBool;
-                        if (newBool == true) {
-                          selectedStringValue = "5";
-                        } else {
-                          selectedStringValue = null;
-                        }
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,
-                  ),
-                  CheckboxListTile(
-                    title: Text("Recondition"),
-                    value: isCheckedRecondition,
-                    onChanged: (bool? newBool) {
-                      setState(() {
-                        isCheckedRecondition = newBool;
-                        if (newBool == true) {
-                          selectedStringValue2 = "6";
-                        } else {
-                          selectedStringValue2 = null;
-                        }
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,
-                  ),
-                  CheckboxListTile(
-                    title: Text("Locally used"),
-                    value: isCheckedLocally,
-                    onChanged: (bool? newBool) {
-                      setState(() {
-                        isCheckedLocally = newBool;
-                        if (newBool == true) {
-                          selectedStringValue3 = "7";
-                        } else {
-                          selectedStringValue3 = null;
-                        }
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,
-                  )
-                ],
+              Container(
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CheckboxListTile(
+                            title: Text("Brand New"),
+                            value: isCheckedBNew,
+                            onChanged: (bool? newBool) {
+                              setState(() {
+                                isCheckedBNew = newBool;
+                                if (newBool == true) {
+                                  selectedStringValue = "5";
+                                } else {
+                                  selectedStringValue = null;
+                                }
+                              });
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          ),
+                          CheckboxListTile(
+                            title: Text("Recondition"),
+                            value: isCheckedRecondition,
+                            onChanged: (bool? newBool) {
+                              setState(() {
+                                isCheckedRecondition = newBool;
+                                if (newBool == true) {
+                                  selectedStringValue2 = "6";
+                                } else {
+                                  selectedStringValue2 = null;
+                                }
+                              });
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          ),
+                          CheckboxListTile(
+                            title: Text("Locally used"),
+                            value: isCheckedLocally,
+                            onChanged: (bool? newBool) {
+                              setState(() {
+                                isCheckedLocally = newBool;
+                                if (newBool == true) {
+                                  selectedStringValue3 = "7";
+                                } else {
+                                  selectedStringValue3 = null;
+                                }
+                              });
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              TextField(
-                maxLines: 5,
-                controller: _partAddition,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+              Container(
+                width: 500,
+                child: TextField(
+                  maxLines: 5,
+                  controller: _partAddition,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    labelText: 'Addition',
                   ),
-                  labelText: 'Addition',
                 ),
               ),
               SizedBox(height: 20),

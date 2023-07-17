@@ -18,7 +18,6 @@ import 'network2.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 
-
 class SellerForm2 extends StatefulWidget {
   const SellerForm2({Key? key}) : super(key: key);
 
@@ -68,165 +67,104 @@ class _SellerForm2State extends State<SellerForm2> {
   String Img_url_up3 = "";
 
   void _wrongCredentials() {
-    if (Platform.isIOS) {
-      showCupertinoDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return CupertinoAlertDialog(
-            title: Text("Credential Error"),
-            content: Text("Please fill all the required fields."),
-            actions: <Widget>[
-              CupertinoDialogAction(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("Credential Error"),
-            content: Text("Please fill all the required fields."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("Credential Error"),
+          content: Text("Please fill all the required fields."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _passwordNotTheSame() {
-    if (Platform.isIOS) {
-      showCupertinoDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return CupertinoAlertDialog(
-            title: Text("Matching error"),
-            content: Text("Your passwords are not the same."),
-            actions: <Widget>[
-              CupertinoDialogAction(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("Matching error"),
-            content: Text("Your passwords are not the same."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("Matching error"),
+          content: Text("Your passwords are not the same."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _stillUploading() {
-    if (Platform.isIOS) {
-      showCupertinoDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return CupertinoAlertDialog(
-            title: Text("Upload Inprogress"),
-            content: Text(
-                "Images are stil  uploading. Try again after few seconds."),
-            actions: <Widget>[
-              CupertinoDialogAction(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("Upload Inprogress"),
-            content: Text(
-                "Images are stil  uploading. Try again after few seconds."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("Upload Inprogress"),
+          content:
+              Text("Images are stil  uploading. Try again after few seconds."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _userCreation(alert) {
-    if (Platform.isIOS) {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("Vendor Creation"),
-            content: Text(alert),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text("Vendor Creation"),
-            content: Text(alert),
-            actions: <Widget>[
-              TextButton(
-                child: Text("Close"),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("Vendor Creation"),
+          content: Text(alert),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _FileSELECTED() {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("File Selection"),
+          content: Text("File Selected: success"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   String filename1 = "";
@@ -253,6 +191,7 @@ class _SellerForm2State extends State<SellerForm2> {
           //passing file bytes and file name for API call
           ApiClient.uploadFile(_paths!.first.bytes!, _paths!.first.name);
           filename1 = _paths!.first.name;
+          _FileSELECTED();
         }
       }
     });
@@ -278,6 +217,7 @@ class _SellerForm2State extends State<SellerForm2> {
           //passing file bytes and file name for API call
           ApiClient.uploadFile(_paths!.first.bytes!, _paths!.first.name);
           filename2 = _paths!.first.name;
+          _FileSELECTED();
         }
       }
     });
@@ -303,6 +243,7 @@ class _SellerForm2State extends State<SellerForm2> {
           //passing file bytes and file name for API call
           ApiClient2.uploadFile(_paths!.first.bytes!, _paths!.first.name);
           filename3 = _paths!.first.name;
+          _FileSELECTED();
         }
       }
     });
@@ -373,6 +314,8 @@ class _SellerForm2State extends State<SellerForm2> {
                 width: 675, // Set your desired width here
                 child: TextField(
                   controller: _passwordController,
+                  obscureText:
+                      true, // Added obsecure property to hide the entered password
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -386,11 +329,13 @@ class _SellerForm2State extends State<SellerForm2> {
                 width: 675, // Set your desired width here
                 child: TextField(
                   controller: _conpasswordController,
+                  obscureText:
+                      true, // Added obsecure property to hide the entered password
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    labelText: 'Conform Password',
+                    labelText: 'Confirm Password',
                   ),
                 ),
               ),
@@ -582,31 +527,45 @@ class _SellerForm2State extends State<SellerForm2> {
                   print(f1);
                   print(f2);
 
-                  if (isCheckedBNew == true && isCheckedRecondition == false && isCheckedLocally == false) {
+                  if (isCheckedBNew == true &&
+                      isCheckedRecondition == false &&
+                      isCheckedLocally == false) {
                     appr_id = "4";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == true && isCheckedRecondition == true && isCheckedLocally == false) {
+                  } else if (isCheckedBNew == true &&
+                      isCheckedRecondition == true &&
+                      isCheckedLocally == false) {
                     appr_id = "5";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == true && isCheckedRecondition == true && isCheckedLocally == true) {
+                  } else if (isCheckedBNew == true &&
+                      isCheckedRecondition == true &&
+                      isCheckedLocally == true) {
                     appr_id = "6";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == false && isCheckedRecondition == true && isCheckedLocally == false) {
+                  } else if (isCheckedBNew == false &&
+                      isCheckedRecondition == true &&
+                      isCheckedLocally == false) {
                     appr_id = "7";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == false && isCheckedRecondition == true && isCheckedLocally == true) {
+                  } else if (isCheckedBNew == false &&
+                      isCheckedRecondition == true &&
+                      isCheckedLocally == true) {
                     appr_id = "8";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == true && isCheckedRecondition == false && isCheckedLocally == true) {
+                  } else if (isCheckedBNew == true &&
+                      isCheckedRecondition == false &&
+                      isCheckedLocally == true) {
                     appr_id = "9";
                     debugPrint(appr_id);
-                  } else if (isCheckedBNew == false && isCheckedRecondition == false && isCheckedLocally == true) {
+                  } else if (isCheckedBNew == false &&
+                      isCheckedRecondition == false &&
+                      isCheckedLocally == true) {
                     appr_id = "10";
                     debugPrint(appr_id);
                   } else {
                     _wrongCredentials();
                     return;
-                  }  
+                  }
                   if (companyname.isEmpty ||
                       companyname == null ||
                       password.isEmpty ||
