@@ -280,6 +280,68 @@ class _NotificationPageState extends State<NotificationPage> {
     }
   }
 
+  void deleteConfirmDialog(txt, notify_id) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text("Do you want to Delete?"),
+          content: Text(txt),
+          actions: <Widget>[
+            TextButton(
+              child: Text("No"),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                "Delete",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+              onPressed: () async {
+                try {
+                  final url = 'https://my.partscart.lk/deleteUSERrequest.php';
+                  final dataSend = {
+                    'rID': notify_id,
+                    // Add more key-value pairs as needed
+                  };
+                  final response = await deleteNOTIFY(url, dataSend);
+
+                  if (response.startsWith('failed')) {
+                    print('Failed to fetch notifications. Error: $response');
+                    return;
+                  }
+                  Navigator.of(dialogContext).pop();
+                  fetchNotifications();
+                } catch (Exception) {
+                  print(Exception);
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<String> deleteNOTIFY(String url, Map<String, dynamic> data) async {
+    try {
+      final response = await http.post(Uri.parse(url), body: data);
+
+      if (response.statusCode == 200) {
+        final jsonData = response.body;
+        return jsonData;
+      } else {
+        return 'API request failed with status code ${response.statusCode}';
+      }
+    } catch (error) {
+      return 'Error: $error';
+    }
+  }
+
   void saveRequestIdofNotify(String requestId) async {
     final Map<String, String> jsonMap = {'notify_ID': requestId};
     final jsonString = json.encode(jsonMap);
@@ -942,6 +1004,15 @@ class _NotificationPageState extends State<NotificationPage> {
                                     notificationsListData[index].requestId);
                               },
                               color: Colors.black, // Set the icon color
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                deleteConfirmDialog(
+                                    notificationsListData[index].name,
+                                    notificationsListData[index].requestId);
+                              },
+                              color: Colors.red, // Set the icon color
                             ),
                           ],
                         ),
