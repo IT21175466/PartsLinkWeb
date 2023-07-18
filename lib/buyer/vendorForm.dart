@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'registerModule(vendor).dart';
 import 'package:http/http.dart' as http;
 // import 'package:flutter_document_picker/flutter_document_picker.dart';
@@ -39,6 +40,9 @@ class _SellerForm2State extends State<SellerForm2> {
   bool? isCheckedLocally = false;
 
   File? image;
+
+  final privacyUri = Uri.parse(
+      'https://partsprivacypolicy.blogspot.com/2022/09/parts-cart-privacy-policy.html');
 
   Future pickImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -504,6 +508,18 @@ class _SellerForm2State extends State<SellerForm2> {
               ListTile(
                 title: const Text('Privacy Policy Terms & Services'),
                 leading: Icon(Icons.radio_button_checked),
+                subtitle: GestureDetector(
+                  onTap: () {
+                    launchUrl(
+                      privacyUri,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  },
+                  child: Text(
+                    'See Privacy Policy',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () async {

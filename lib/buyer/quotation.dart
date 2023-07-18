@@ -10,6 +10,7 @@ import '/utils/device.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:html' as html;
+import 'package:gap/buyer/EQ(vendor).dart';
 
 class NotificationsListData {
   final String name;
@@ -748,6 +749,17 @@ class _QuotationPageState extends State<QuotationPage> {
     );
   }
 
+  void saveQID(notifyy) {
+    final Map<String, String> jsonMap = {'notify_ID': notifyy};
+    final jsonString = json.encode(jsonMap);
+    final storage = html.window.localStorage;
+    storage['notify_ID2.json'] = jsonString;
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => editQuotationReqest()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final heightFactor = DeviceUtils.getHeightFactor(context);
@@ -823,8 +835,7 @@ class _QuotationPageState extends State<QuotationPage> {
                             IconButton(
                               icon: Icon(Icons.edit),
                               onPressed: () {
-                                // saveRequestIdofNotify(
-                                //     notificationsListData[index].requestId);
+                                saveQID(notificationsListData[index].requestId);
                               },
                               color: Colors.black, // Set the icon color
                             ),
