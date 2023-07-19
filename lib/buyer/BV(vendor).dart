@@ -40,7 +40,6 @@ class _VendorBaseViewState extends State<VendorBaseView> {
         if (links.isNotEmpty) {
           final modifiedLink =
               'https://my.partscart.lk/next/${links[0].replaceAll('./', '')}';
-          print(modifiedLink);
 
           // Replace the modified link with another image URL if it matches a specific value
           if (modifiedLink == 'https://my.partscart.lk/next/') {
@@ -102,15 +101,10 @@ class _VendorBaseViewState extends State<VendorBaseView> {
             .where((url) => url != 'https://my.partscart.lk/next/')
             .toList();
 
-        print(imgURLs);
         _showFullModal(context);
         // ... print or use other fields as needed
-      } else {
-        print('API request failed with status code ${response.statusCode}');
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
+      } else {}
+    } catch (error) {}
   }
 
   _showFullModal(context) {

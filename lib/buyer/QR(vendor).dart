@@ -228,7 +228,7 @@ class _QuotationRequestState extends State<QuotationRequest> {
     var partdate = _dateController.text.trim();
     var year = partdate.substring(0, 4);
     var partimg = _uploadedImageUrls.join(',');
-    var partaddition = _partAddition.text.trim();
+    var partaddition = "";
     var condition_id = "";
 
     if (partname.isEmpty ||
@@ -613,19 +613,6 @@ class _QuotationRequestState extends State<QuotationRequest> {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Container(
-                width: 500,
-                child: TextField(
-                  maxLines: 5,
-                  controller: _partAddition,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    labelText: 'Addition',
-                  ),
                 ),
               ),
               SizedBox(height: 20),

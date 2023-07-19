@@ -710,7 +710,7 @@ class _QuotationPageState extends State<QuotationPage> {
                   Text(partName,
                       style: TextStyle(fontSize: 20, color: Color(0xFF877DAD))),
                   SizedBox(height: 30),
-                  Text('Part Number:',
+                  Text('Part Price:',
                       style: TextStyle(fontSize: 20, color: Colors.black)),
                   Text(partNo,
                       style: TextStyle(fontSize: 20, color: Color(0xFF877DAD))),

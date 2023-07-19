@@ -149,7 +149,7 @@ class _LoginPageState2 extends State<LoginPage2> {
                               debugPrint(selectedItem);
                             });
                           },
-                          items: ['user', 'vendor']
+                          items: ['Buyer', 'Vendor']
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -270,13 +270,13 @@ class _LoginPageState2 extends State<LoginPage2> {
                           _wrongCredentials();
                         }
                         if (selectedItem != null &&
-                            selectedItem == "user" &&
+                            selectedItem == "Buyer" &&
                             username.isNotEmpty &&
                             password.isNotEmpty) {
                           fetchData("https://my.partscart.lk/login_user.php",
                               username, password, selectedItem);
                         } else if (selectedItem != null &&
-                            selectedItem == "vendor" &&
+                            selectedItem == "Vendor" &&
                             username.isNotEmpty &&
                             password.isNotEmpty) {
                           fetchData("https://my.partscart.lk/login_vendor.php",
@@ -350,7 +350,7 @@ class _LoginPageState2 extends State<LoginPage2> {
       String urlz, String user, String password, selected) async {
     //about this save variable we will discuss later in this code :)
     String? save;
-    if (selected == "user") {
+    if (selected == "Buyer") {
       final url = Uri.parse(urlz);
       //sending user an password inputs into php API
       try {
@@ -425,7 +425,7 @@ class _LoginPageState2 extends State<LoginPage2> {
         print('Error: $error');
         _showSuccessDialog('Error: $error');
       }
-    } else if (selected == "vendor") {
+    } else if (selected == "Vendor") {
       final url = Uri.parse(urlz); // Replace with your API URL
       try {
         final response = await http.get(url, headers: {

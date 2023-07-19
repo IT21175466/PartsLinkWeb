@@ -347,7 +347,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: 'Part Number',
+                    labelText: 'Part Price',
                   ),
                 ),
               ),

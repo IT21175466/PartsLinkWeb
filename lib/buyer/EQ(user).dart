@@ -115,7 +115,6 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
       setState(() {
         _uploadedImageUrls.add(imageUrl);
       });
-      print(_uploadedImageUrls);
     }
   }
 
@@ -174,15 +173,13 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
           Map<String, dynamic> dataMap = jsonDecode(storedData);
           if (dataMap.containsKey('notify_ID')) {
             notify_ID = dataMap['notify_ID'];
-            print(notify_ID);
+
             loadDatatoPlaceholders(notify_ID);
             return;
           }
         }
       }
-    } catch (e) {
-      print('Error loading request ID: $e');
-    }
+    } catch (e) {}
   }
 
   String partName = "";
@@ -226,9 +223,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
           _partAddition.text = partAddition;
         }
       }
-    } catch (error) {
-      print('Failed to fetch notifications. Error: $error');
-    }
+    } catch (error) {}
   }
 
   void updateTheQuota(data1) async {
@@ -241,7 +236,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
         var pDesc = _partDescription.text.trim();
         var pModel = _partModel.text.trim();
         var pYear = _partYear.text.trim();
-        var pAdd = _partAddition.text.trim();
+        var pAdd = "";
         sendEDITED(pName, pNum, pDesc, pModel, pYear, pAdd, data1, partimg);
       } else {
         var pName = _partName.text.trim();
@@ -249,7 +244,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
         var pDesc = _partDescription.text.trim();
         var pModel = _partModel.text.trim();
         var pYear = _partYear.text.trim();
-        var pAdd = _partAddition.text.trim();
+        var pAdd = "";
         sendEDITED(
             pName, pNum, pDesc, pModel, pYear, pAdd, partCountry, partimg);
       }
@@ -261,7 +256,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
         var pDesc = _partDescription.text.trim();
         var pModel = _partModel.text.trim();
         var pYear = _partYear.text.trim();
-        var pAdd = _partAddition.text.trim();
+        var pAdd = "";
         sendEDITED(pName, pNum, pDesc, pModel, pYear, pAdd, data1, partimg);
       } else {
         var pName = _partName.text.trim();
@@ -269,7 +264,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
         var pDesc = _partDescription.text.trim();
         var pModel = _partModel.text.trim();
         var pYear = _partYear.text.trim();
-        var pAdd = _partAddition.text.trim();
+        var pAdd = "";
         sendEDITED(
             pName, pNum, pDesc, pModel, pYear, pAdd, partCountry, partimg);
       }
@@ -295,14 +290,12 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
 
       if (response.statusCode == 200) {
         final jsonData = response.body;
-        print(jsonData);
+
         if (jsonData == "success") {
           _updatedAlert();
         }
       }
-    } catch (error) {
-      print("An error occured :$error");
-    }
+    } catch (error) {}
   }
 
   @override
@@ -336,7 +329,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: '$partName',
+                    labelText: 'Part Name',
                   ),
                 ),
               ),
@@ -349,7 +342,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: '$partNumber',
+                    labelText: 'Part Number',
                   ),
                 ),
               ),
@@ -362,7 +355,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: '$partDescription',
+                    labelText: 'Part Description',
                   ),
                 ),
               ),
@@ -408,7 +401,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: '$partModel',
+                    labelText: 'Part Model',
                   ),
                 ),
               ),
@@ -421,7 +414,7 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    labelText: '$partYear',
+                    labelText: 'Part Year',
                   ),
                 ),
               ),
@@ -488,19 +481,6 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                     ),
                   ),
                 ],
-              ),
-              Container(
-                width: 500,
-                child: TextField(
-                  maxLines: 5,
-                  controller: _partAddition,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    labelText: '$partAddition',
-                  ),
-                ),
               ),
               SizedBox(height: 20),
               ElevatedButton(

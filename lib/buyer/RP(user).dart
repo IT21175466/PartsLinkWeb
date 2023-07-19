@@ -468,19 +468,6 @@ class _RequestPartState extends State<RequestPart> {
                   ),
                 ],
               ),
-              Container(
-                width: 500,
-                child: TextField(
-                  maxLines: 5,
-                  controller: _partAddition,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    labelText: 'Addition',
-                  ),
-                ),
-              ),
               SizedBox(height: 15),
               Container(
                 width: 450,
@@ -549,7 +536,7 @@ class _RequestPartState extends State<RequestPart> {
                   var partdate = _dateController.text.trim();
                   var year = partdate.substring(0, 4);
                   var partimg = _uploadedImageUrls.join(',');
-                  var partaddition = _partAddition.text.trim();
+                  var partaddition = "";
 
                   if (partname.isEmpty ||
                       partnum.isEmpty ||
