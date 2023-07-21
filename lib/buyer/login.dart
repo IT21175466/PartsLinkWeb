@@ -114,7 +114,7 @@ class _LoginPageState2 extends State<LoginPage2> {
                   ),
                   const SizedBox(height: 40),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 13),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     width: 450,
                     // height: 60,
                     decoration: BoxDecoration(
@@ -123,45 +123,42 @@ class _LoginPageState2 extends State<LoginPage2> {
                         color: Colors.black,
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        Text(
-                          'User Type',
-                          style: TextStyle(
-                            color: Colors.black,
-                            // fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Spacer(),
-                        DropdownButton<String>(
-                          value: selectedItem,
-                          icon: Icon(Icons.adaptive.arrow_forward),
 
-                          iconSize: 24,
-                          elevation: 16,
-
-                          style: TextStyle(color: Colors.black),
-                          underline: SizedBox(), // Remove the default underline
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              selectedItem = newValue!;
-                              debugPrint(selectedItem);
-                            });
-                          },
-                          items: ['Buyer', 'Vendor']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Text(value),
-                              ),
-                            );
-                          }).toList(),
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      hint: Text(
+                        'User Type',
+                        style: TextStyle(
+                          color: Colors.black,
+                          // fontWeight: FontWeight.w400,
+                          fontSize: 16,
                         ),
-                      ],
+                      ),
+                      value: selectedItem,
+                      icon: Icon(Icons.adaptive.arrow_forward),
+
+                      iconSize: 24,
+                      elevation: 16,
+
+                      style: TextStyle(color: Colors.black),
+                      underline: SizedBox(), // Remove the default underline
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedItem = newValue!;
+                          debugPrint(selectedItem);
+                        });
+                      },
+                      items: ['Buyer', 'Vendor']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          // child: Padding(
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: 16, vertical: 8),
+                          child: Text(value),
+                          //),
+                        );
+                      }).toList(),
                     ),
                   ),
                   // Container(

@@ -365,23 +365,30 @@ class _VendorBaseViewState extends State<VendorBaseView> {
                 alignment: Alignment.center,
                 height: 300 * heightFactor,
                 width: 400 * widthFactor,
-                color: Color.fromRGBO(0, 0, 0, 1),
-                child: Stack(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 290 * heightFactor,
-                      width: 200 * widthFactor,
-                      child: Text(
-                        "Reminders by admin",
-                        style: TextStyle(
-                            fontSize: 15 * widthFactor,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300),
-                        textAlign: TextAlign.center,
-                      ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.darken,
                     ),
-                  ],
+                  ),
+                ),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 290 * heightFactor,
+                  width: 200 * widthFactor,
+                  child: Text(
+                    "Reminders by admin",
+                    style: TextStyle(
+                        fontSize: 15 * widthFactor,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w300),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
               onTap: () {
