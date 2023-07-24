@@ -107,6 +107,19 @@ class _BuyerFormState2 extends State<BuyerForm2> {
               ),
               const SizedBox(height: 20),
               Container(
+                width: 450,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 5),
+              Container(
                 width: 450, // Set your desired width here
                 child: TextField(
                   controller: _usernameController,
@@ -118,26 +131,20 @@ class _BuyerFormState2 extends State<BuyerForm2> {
                   ),
                 ),
               ),
-              // Container(
-              //   width: 450, // Set the desired width for the username field
-              //   child: TextField(
-              //     controller: _usernameController,
-              //     decoration: InputDecoration(
-              //       hintText: 'Username',
-              //       hintStyle: TextStyle(
-              //         color: Colors.black,
-              //         fontWeight: FontWeight.w400,
-              //         fontSize: 16,
-              //       ),
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(10.0),
-              //       ),
-              //       filled: true,
-              //       fillColor: Colors.white,
-              //     ),
-              //   ),
-              // ),
               const SizedBox(height: 20),
+              Container(
+                width: 450,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 5),
               Container(
                 width: 450, // Set your desired width here
                 child: TextField(
@@ -150,26 +157,20 @@ class _BuyerFormState2 extends State<BuyerForm2> {
                   ),
                 ),
               ),
-              // Container(
-              //   width: 450, // Set the desired width for the username field
-              //   child: TextField(
-              //     controller: _emailController,
-              //     decoration: InputDecoration(
-              //       hintText: 'Email',
-              //       hintStyle: TextStyle(
-              //         color: Colors.black,
-              //         fontWeight: FontWeight.w400,
-              //         fontSize: 16,
-              //       ),
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(10.0),
-              //       ),
-              //       filled: true,
-              //       fillColor: Colors.white,
-              //     ),
-              //   ),
-              // ),
               const SizedBox(height: 20),
+              Container(
+                width: 450,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 5),
               Container(
                 width: 450, // Set your desired width here
                 child: TextField(
@@ -182,26 +183,20 @@ class _BuyerFormState2 extends State<BuyerForm2> {
                   ),
                 ),
               ),
-              // Container(
-              //   width: 450, // Set the desired width for the username field
-              //   child: TextField(
-              //     controller: _mobileController,
-              //     decoration: InputDecoration(
-              //       hintText: 'Mobile Number',
-              //       hintStyle: TextStyle(
-              //         color: Colors.black,
-              //         fontWeight: FontWeight.w400,
-              //         fontSize: 16,
-              //       ),
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(10.0),
-              //       ),
-              //       filled: true,
-              //       fillColor: Colors.white,
-              //     ),
-              //   ),
-              // ),
               const SizedBox(height: 20),
+              Container(
+                width: 450,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 5),
               Container(
                 width: 450, // Set your desired width here
                 child: TextField(
@@ -215,28 +210,20 @@ class _BuyerFormState2 extends State<BuyerForm2> {
                   ),
                 ),
               ),
-              // Container(
-              //   width: 450, // Set the desired width for the username field
-
-              //   child: TextField(
-              //     controller: _passwordController,
-              //     obscureText: true,
-              //     decoration: InputDecoration(
-              //       hintText: 'Password',
-              //       hintStyle: TextStyle(
-              //         color: Colors.black,
-              //         fontWeight: FontWeight.w400,
-              //         fontSize: 16,
-              //       ),
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(10.0),
-              //       ),
-              //       filled: true,
-              //       fillColor: Colors.white,
-              //     ),
-              //   ),
-              // ),
               const SizedBox(height: 20),
+              Container(
+                width: 450,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 5),
               Container(
                 width: 450, // Set your desired width here
                 child: TextField(
@@ -250,26 +237,6 @@ class _BuyerFormState2 extends State<BuyerForm2> {
                   ),
                 ),
               ),
-              // Container(
-              //   width: 450, // Set the desired width for the username field
-              //   child: TextField(
-              //     controller: _conpasswordController,
-              //     obscureText: true,
-              //     decoration: InputDecoration(
-              //       hintText: 'Confirm Password',
-              //       hintStyle: TextStyle(
-              //         color: Colors.black,
-              //         fontWeight: FontWeight.w400,
-              //         fontSize: 16,
-              //       ),
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(10.0),
-              //       ),
-              //       filled: true,
-              //       fillColor: Colors.white,
-              //     ),
-              //   ),
-              // ),
               const SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () async {

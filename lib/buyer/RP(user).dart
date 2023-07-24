@@ -260,6 +260,19 @@ class _RequestPartState extends State<RequestPart> {
               SizedBox(height: 20),
               Container(
                 width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partName,
                   decoration: InputDecoration(
@@ -271,6 +284,19 @@ class _RequestPartState extends State<RequestPart> {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               Container(
                 width: 500,
                 child: TextField(
@@ -286,6 +312,19 @@ class _RequestPartState extends State<RequestPart> {
               SizedBox(height: 10),
               Container(
                 width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partDescription,
                   decoration: InputDecoration(
@@ -297,6 +336,19 @@ class _RequestPartState extends State<RequestPart> {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               Container(
                 width: 500,
                 child: TextField(
@@ -332,6 +384,19 @@ class _RequestPartState extends State<RequestPart> {
               SizedBox(height: 10),
               Container(
                 width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partModel,
                   decoration: InputDecoration(
@@ -343,6 +408,19 @@ class _RequestPartState extends State<RequestPart> {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               Container(
                 width: 500,
                 child: TextField(
