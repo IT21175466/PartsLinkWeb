@@ -323,6 +323,19 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
               SizedBox(height: 20),
               Container(
                 width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partName,
                   decoration: InputDecoration(
@@ -330,6 +343,19 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'Part Name',
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ),
@@ -349,6 +375,19 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
               SizedBox(height: 10),
               Container(
                 width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partDescription,
                   decoration: InputDecoration(
@@ -356,6 +395,19 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'Part Description',
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ),
@@ -395,6 +447,19 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
               SizedBox(height: 10),
               Container(
                 width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
                 child: TextField(
                   controller: _partModel,
                   decoration: InputDecoration(
@@ -402,6 +467,19 @@ class _editQuotationReqestState extends State<editQuotationReqest> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     labelText: 'Part Model',
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ),

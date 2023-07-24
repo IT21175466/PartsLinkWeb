@@ -263,7 +263,20 @@ class _SellerForm2State extends State<SellerForm2> {
           child: Column(
             children: [
               Container(
-                width: 675, // Set your desired width here
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500, // Set your desired width here
                 child: TextField(
                   controller: _companyNameController,
                   decoration: InputDecoration(
@@ -276,7 +289,20 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500, // Set your desired width here
                 child: TextField(
                   controller: _addressController,
                   decoration: InputDecoration(
@@ -289,7 +315,20 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500, // Set your desired width here
                 child: TextField(
                   controller: _mobileController,
                   decoration: InputDecoration(
@@ -302,7 +341,20 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500, // Set your desired width here
                 child: TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -315,7 +367,20 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500, // Set your desired width here
                 child: TextField(
                   controller: _passwordController,
                   obscureText:
@@ -330,7 +395,20 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500, // Set your desired width here
                 child: TextField(
                   controller: _conpasswordController,
                   obscureText:
@@ -345,7 +423,20 @@ class _SellerForm2State extends State<SellerForm2> {
               ),
               SizedBox(height: 10),
               Container(
-                width: 675, // Set your desired width here
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 500, // Set your desired width here
                 child: TextField(
                   controller: _nicController,
                   decoration: InputDecoration(
@@ -452,74 +543,68 @@ class _SellerForm2State extends State<SellerForm2> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CheckboxListTile(
-                          title: Text("Brand New"),
-                          value: isCheckedBNew,
-                          onChanged: (bool? newBool) {
-                            setState(() {
-                              isCheckedBNew = newBool;
-                              if (newBool == true) {
-                                selectedStringValue = "5";
-                              } else {
-                                selectedStringValue = null;
-                              }
-                              isCheckedBNew = newBool;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
+                        Container(
+                          width: 450,
+                          child: CheckboxListTile(
+                            title: Text("Brand New"),
+                            value: isCheckedBNew,
+                            onChanged: (bool? newBool) {
+                              setState(() {
+                                isCheckedBNew = newBool;
+                                if (newBool == true) {
+                                  selectedStringValue = "5";
+                                } else {
+                                  selectedStringValue = null;
+                                }
+                                isCheckedBNew = newBool;
+                              });
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          ),
                         ),
-                        CheckboxListTile(
-                          title: Text("Recondition"),
-                          value: isCheckedRecondition,
-                          onChanged: (bool? newBool) {
-                            setState(() {
-                              isCheckedRecondition = newBool;
-                              if (newBool == true) {
-                                selectedStringValue2 = "6";
-                              } else {
-                                selectedStringValue2 = null;
-                              }
-                              isCheckedRecondition = newBool;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
+                        Container(
+                          width: 450,
+                          child: CheckboxListTile(
+                            title: Text("Recondition"),
+                            value: isCheckedRecondition,
+                            onChanged: (bool? newBool) {
+                              setState(() {
+                                isCheckedRecondition = newBool;
+                                if (newBool == true) {
+                                  selectedStringValue2 = "6";
+                                } else {
+                                  selectedStringValue2 = null;
+                                }
+                                isCheckedRecondition = newBool;
+                              });
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          ),
                         ),
-                        CheckboxListTile(
-                          title: Text("Locally used"),
-                          value: isCheckedLocally,
-                          onChanged: (bool? newBool) {
-                            setState(() {
-                              isCheckedLocally = newBool;
-                              if (newBool == true) {
-                                selectedStringValue3 = "7";
-                              } else {
-                                selectedStringValue3 = null;
-                              }
-                              isCheckedLocally = newBool;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
+                        Container(
+                          width: 450,
+                          child: CheckboxListTile(
+                            title: Text("Locally used"),
+                            value: isCheckedLocally,
+                            onChanged: (bool? newBool) {
+                              setState(() {
+                                isCheckedLocally = newBool;
+                                if (newBool == true) {
+                                  selectedStringValue3 = "7";
+                                } else {
+                                  selectedStringValue3 = null;
+                                }
+                                isCheckedLocally = newBool;
+                              });
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          ),
                         ),
+                        SizedBox(height: 20)
                       ],
                     ),
                   ),
                 ],
-              ),
-              ListTile(
-                title: const Text('Privacy Policy Terms & Services'),
-                leading: Icon(Icons.radio_button_checked),
-                subtitle: GestureDetector(
-                  onTap: () {
-                    launchUrl(
-                      privacyUri,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  },
-                  child: Text(
-                    'See Privacy Policy',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
               ),
               ElevatedButton(
                 onPressed: () async {

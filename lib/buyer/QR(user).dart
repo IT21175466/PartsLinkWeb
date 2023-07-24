@@ -322,6 +322,19 @@ class _QuotationReqestState extends State<QuotationReqest> {
           child: Column(
             children: [
               SizedBox(height: 20),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               TextField(
                 controller: _partName,
                 decoration: InputDecoration(
@@ -332,6 +345,19 @@ class _QuotationReqestState extends State<QuotationReqest> {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               TextField(
                 controller: _partNumber,
                 decoration: InputDecoration(
@@ -342,6 +368,19 @@ class _QuotationReqestState extends State<QuotationReqest> {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               TextField(
                 controller: _partDescription,
                 decoration: InputDecoration(
@@ -352,6 +391,19 @@ class _QuotationReqestState extends State<QuotationReqest> {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               TextField(
                 controller: countryController,
                 readOnly: true,
@@ -382,6 +434,19 @@ class _QuotationReqestState extends State<QuotationReqest> {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               TextField(
                 controller: _partModel,
                 decoration: InputDecoration(
@@ -392,6 +457,19 @@ class _QuotationReqestState extends State<QuotationReqest> {
                 ),
               ),
               SizedBox(height: 10),
+              Container(
+                width: 500,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "This filed is required *",
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
               TextField(
                 controller: _dateController,
                 readOnly: true,
